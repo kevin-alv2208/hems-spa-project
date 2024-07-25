@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582563642316",
+    "project_id": "hems-spa",
+    "storage_bucket": "hems-spa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582563642316:android:783fc00210fd7cf9ee3b69",
+        "android_client_info": {
+          "package_name": "com.fidelitas.hemsspa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAppfZJ-d7Z3MtAD1EpJ2VAdqbkokM7m6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
