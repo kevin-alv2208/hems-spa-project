@@ -104,6 +104,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Services',
           path: '/services',
           builder: (context, params) => const ServicesWidget(),
+        ),
+        FFRoute(
+          name: 'IncluirServicio',
+          path: '/incluirServicio',
+          builder: (context, params) => const IncluirServicioWidget(),
+        ),
+        FFRoute(
+          name: 'eliminarCita',
+          path: '/eliminarCita',
+          builder: (context, params) => const EliminarCitaWidget(),
+        ),
+        FFRoute(
+          name: 'perfil',
+          path: '/perfil',
+          builder: (context, params) => const PerfilWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

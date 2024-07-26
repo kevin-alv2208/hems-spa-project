@@ -41,7 +41,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).success,
+          backgroundColor: const Color(0xFF77BBA2),
           automaticallyImplyLeading: false,
           title: Text(
             'Servicios',
@@ -74,7 +74,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               ),
             ),
           ],
-          centerTitle: false,
+          centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
@@ -133,11 +133,15 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 20.0),
                                   child: Text(
-                                    'Productos',
+                                    'En esta seccion se pueden visualizar y registrar los servicios.',
+                                    textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Readex Pro',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          fontSize: 16.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -279,7 +283,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                           print(
                                                               'Button pressed ...');
                                                         },
-                                                        text: 'Reservar',
+                                                        text: 'Registrar cita',
                                                         options:
                                                             FFButtonOptions(
                                                           height: 40.0,
