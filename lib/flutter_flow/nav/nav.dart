@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -72,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const IndexWidget() : const ServicesWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const ContactUsWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const IndexWidget() : const ServicesWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const ContactUsWidget(),
         ),
         FFRoute(
           name: 'Login',
@@ -103,7 +104,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Services',
           path: '/services',
-          builder: (context, params) => const ServicesWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Services')
+              : const ServicesWidget(),
         ),
         FFRoute(
           name: 'IncluirServicio',
@@ -118,7 +121,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'perfil',
           path: '/perfil',
-          builder: (context, params) => const PerfilWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'perfil')
+              : const PerfilWidget(),
+        ),
+        FFRoute(
+          name: 'ContactUs',
+          path: '/contactUs',
+          builder: (context, params) => ContactUsWidget(
+            para: params.getParam(
+              'para',
+              ParamType.LatLng,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -289,7 +304,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/services';
+            return '/contactUs';
           }
           return null;
         },

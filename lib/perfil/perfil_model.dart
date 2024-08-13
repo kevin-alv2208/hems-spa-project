@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class PerfilModel extends FlutterFlowModel<PerfilWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
 
@@ -13,7 +12,5 @@ class PerfilModel extends FlutterFlowModel<PerfilWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 }

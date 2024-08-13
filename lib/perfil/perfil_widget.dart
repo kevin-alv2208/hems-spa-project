@@ -230,9 +230,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: const Color(0xFF77BBA2),
@@ -495,7 +493,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                     await authManager.signOut();
                     GoRouter.of(context).clearRedirectLocation();
 
-                    context.goNamedAuth('Services', context.mounted);
+                    context.goNamedAuth('ContactUs', context.mounted);
                   },
                   text: 'Cerrar sesión',
                   options: FFButtonOptions(

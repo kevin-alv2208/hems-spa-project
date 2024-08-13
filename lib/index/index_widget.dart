@@ -34,9 +34,7 @@ class _IndexWidgetState extends State<IndexWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -71,7 +69,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      context.goNamedAuth('Services', context.mounted);
+                      context.goNamedAuth('ContactUs', context.mounted);
                     },
                     text: 'Log out',
                     options: FFButtonOptions(

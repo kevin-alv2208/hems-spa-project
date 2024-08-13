@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class IncluirServicioModel extends FlutterFlowModel<IncluirServicioWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for nameTxt widget.
   FocusNode? nameTxtFocusNode;
@@ -26,7 +25,6 @@ class IncluirServicioModel extends FlutterFlowModel<IncluirServicioWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     nameTxtFocusNode?.dispose();
     nameTxtTextController?.dispose();
 

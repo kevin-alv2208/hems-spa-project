@@ -8,3 +8,4 @@ export '/incluir_servicio/incluir_servicio_widget.dart'
     show IncluirServicioWidget;
 export '/eliminar_cita/eliminar_cita_widget.dart' show EliminarCitaWidget;
 export '/perfil/perfil_widget.dart' show PerfilWidget;
+export '/contact_us/contact_us_widget.dart' show ContactUsWidget;
