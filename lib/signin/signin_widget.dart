@@ -507,7 +507,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                           ));
 
                                       context.goNamedAuth(
-                                          'perfil', context.mounted);
+                                          'Services', context.mounted);
                                     },
                                     text: 'Registrarse',
                                     options: FFButtonOptions(
@@ -580,7 +580,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                           }
 
                                           context.goNamedAuth(
-                                              'perfil', context.mounted);
+                                              'Services', context.mounted);
                                         },
                                         text: 'Continuar con Google',
                                         icon: const FaIcon(
@@ -634,8 +634,8 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                   return;
                                                 }
 
-                                                context.goNamedAuth(
-                                                    'perfil', context.mounted);
+                                                context.goNamedAuth('Services',
+                                                    context.mounted);
                                               },
                                               text: 'Continuar con Apple',
                                               icon: const FaIcon(

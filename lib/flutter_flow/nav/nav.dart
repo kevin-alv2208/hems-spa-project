@@ -73,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const ContactUsWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const PerfilWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const ContactUsWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const PerfilWidget(),
         ),
         FFRoute(
           name: 'Login',
@@ -304,7 +304,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/contactUs';
+            return '/perfil';
           }
           return null;
         },

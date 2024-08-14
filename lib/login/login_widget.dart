@@ -340,7 +340,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       }
 
                                       context.goNamedAuth(
-                                          'perfil', context.mounted);
+                                          'Services', context.mounted);
                                     },
                                     text: 'Iniciar sesión',
                                     options: FFButtonOptions(
@@ -413,7 +413,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           }
 
                                           context.goNamedAuth(
-                                              'perfil', context.mounted);
+                                              'Services', context.mounted);
                                         },
                                         text: 'Continuar con Google',
                                         icon: const FaIcon(
@@ -467,8 +467,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   return;
                                                 }
 
-                                                context.goNamedAuth(
-                                                    'perfil', context.mounted);
+                                                context.goNamedAuth('Services',
+                                                    context.mounted);
                                               },
                                               text: 'Continuar con Apple',
                                               icon: const FaIcon(

@@ -69,7 +69,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      context.goNamedAuth('ContactUs', context.mounted);
+                      context.goNamedAuth('perfil', context.mounted);
                     },
                     text: 'Log out',
                     options: FFButtonOptions(
