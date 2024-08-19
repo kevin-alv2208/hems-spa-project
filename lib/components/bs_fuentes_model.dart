@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'index_widget.dart' show IndexWidget;
+import 'bs_fuentes_widget.dart' show BsFuentesWidget;
 import 'package:flutter/material.dart';
 
-class IndexModel extends FlutterFlowModel<IndexWidget> {
+class BsFuentesModel extends FlutterFlowModel<BsFuentesWidget> {
   @override
   void initState(BuildContext context) {}
 

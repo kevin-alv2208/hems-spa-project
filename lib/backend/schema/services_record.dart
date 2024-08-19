@@ -40,12 +40,36 @@ class ServicesRecord extends FirestoreRecord {
   bool get confirmationStatus => _confirmationStatus ?? false;
   bool hasConfirmationStatus() => _confirmationStatus != null;
 
+  // "image" field.
+  String? _image;
+  String get image => _image ?? '';
+  bool hasImage() => _image != null;
+
+  // "appointmentTime" field.
+  DateTime? _appointmentTime;
+  DateTime? get appointmentTime => _appointmentTime;
+  bool hasAppointmentTime() => _appointmentTime != null;
+
+  // "cost" field.
+  int? _cost;
+  int get cost => _cost ?? 0;
+  bool hasCost() => _cost != null;
+
+  // "imageBlurHash" field.
+  String? _imageBlurHash;
+  String get imageBlurHash => _imageBlurHash ?? '';
+  bool hasImageBlurHash() => _imageBlurHash != null;
+
   void _initializeFields() {
     _serviceName = snapshotData['serviceName'] as String?;
     _description = snapshotData['description'] as String?;
     _appointmentDate = snapshotData['appointmentDate'] as DateTime?;
     _location = snapshotData['location'] as String?;
     _confirmationStatus = snapshotData['confirmationStatus'] as bool?;
+    _image = snapshotData['image'] as String?;
+    _appointmentTime = snapshotData['appointmentTime'] as DateTime?;
+    _cost = castToType<int>(snapshotData['cost']);
+    _imageBlurHash = snapshotData['imageBlurHash'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -88,6 +112,10 @@ Map<String, dynamic> createServicesRecordData({
   DateTime? appointmentDate,
   String? location,
   bool? confirmationStatus,
+  String? image,
+  DateTime? appointmentTime,
+  int? cost,
+  String? imageBlurHash,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -96,6 +124,10 @@ Map<String, dynamic> createServicesRecordData({
       'appointmentDate': appointmentDate,
       'location': location,
       'confirmationStatus': confirmationStatus,
+      'image': image,
+      'appointmentTime': appointmentTime,
+      'cost': cost,
+      'imageBlurHash': imageBlurHash,
     }.withoutNulls,
   );
 
@@ -111,7 +143,11 @@ class ServicesRecordDocumentEquality implements Equality<ServicesRecord> {
         e1?.description == e2?.description &&
         e1?.appointmentDate == e2?.appointmentDate &&
         e1?.location == e2?.location &&
-        e1?.confirmationStatus == e2?.confirmationStatus;
+        e1?.confirmationStatus == e2?.confirmationStatus &&
+        e1?.image == e2?.image &&
+        e1?.appointmentTime == e2?.appointmentTime &&
+        e1?.cost == e2?.cost &&
+        e1?.imageBlurHash == e2?.imageBlurHash;
   }
 
   @override
@@ -120,7 +156,11 @@ class ServicesRecordDocumentEquality implements Equality<ServicesRecord> {
         e?.description,
         e?.appointmentDate,
         e?.location,
-        e?.confirmationStatus
+        e?.confirmationStatus,
+        e?.image,
+        e?.appointmentTime,
+        e?.cost,
+        e?.imageBlurHash
       ]);
 
   @override

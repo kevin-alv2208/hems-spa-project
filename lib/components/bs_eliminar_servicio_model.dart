@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'eliminar_cita_widget.dart' show EliminarCitaWidget;
+import 'bs_eliminar_servicio_widget.dart' show BsEliminarServicioWidget;
 import 'package:flutter/material.dart';
 
-class EliminarCitaModel extends FlutterFlowModel<EliminarCitaWidget> {
+class BsEliminarServicioModel
+    extends FlutterFlowModel<BsEliminarServicioWidget> {
   @override
   void initState(BuildContext context) {}
 

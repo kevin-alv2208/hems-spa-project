@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -73,23 +74,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const PerfilWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const PerfilWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const LoginWidget(),
         ),
         FFRoute(
           name: 'Login',
           path: '/login',
           builder: (context, params) => const LoginWidget(),
-        ),
-        FFRoute(
-          name: 'Index',
-          path: '/index',
-          builder: (context, params) => const IndexWidget(),
         ),
         FFRoute(
           name: 'Signin',
@@ -102,6 +98,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const ForgotpasswordWidget(),
         ),
         FFRoute(
+          name: 'Perfil',
+          path: '/perfil',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Perfil')
+              : const PerfilWidget(),
+        ),
+        FFRoute(
+          name: 'Contactenos',
+          path: '/contactenos',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'Contactenos')
+              : ContactenosWidget(
+                  para: params.getParam(
+                    'para',
+                    ParamType.LatLng,
+                  ),
+                ),
+        ),
+        FFRoute(
           name: 'Services',
           path: '/services',
           builder: (context, params) => params.isEmpty
@@ -109,31 +124,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const ServicesWidget(),
         ),
         FFRoute(
-          name: 'IncluirServicio',
-          path: '/incluirServicio',
-          builder: (context, params) => const IncluirServicioWidget(),
-        ),
-        FFRoute(
-          name: 'eliminarCita',
-          path: '/eliminarCita',
-          builder: (context, params) => const EliminarCitaWidget(),
-        ),
-        FFRoute(
-          name: 'perfil',
-          path: '/perfil',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'perfil')
-              : const PerfilWidget(),
-        ),
-        FFRoute(
-          name: 'ContactUs',
-          path: '/contactUs',
-          builder: (context, params) => ContactUsWidget(
-            para: params.getParam(
-              'para',
-              ParamType.LatLng,
+          name: 'DetalleServicio',
+          path: '/detalleServicio',
+          asyncParams: {
+            'detalleServicio':
+                getDoc(['services'], ServicesRecord.fromSnapshot),
+          },
+          builder: (context, params) => DetalleServicioWidget(
+            detalleServicio: params.getParam(
+              'detalleServicio',
+              ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'MisServicios',
+          path: '/misServicios',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'MisServicios')
+              : const MisServiciosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -304,7 +313,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/perfil';
+            return '/login';
           }
           return null;
         },

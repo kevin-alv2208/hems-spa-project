@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'forgotpassword_model.dart';
 export 'forgotpassword_model.dart';
 
@@ -42,6 +43,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -56,19 +59,25 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 200.0,
-                    height: 70.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Text(
-                      'Logo',
-                      style: FlutterFlowTheme.of(context).displaySmall.override(
-                            fontFamily: 'Outfit',
-                            letterSpacing: 0.0,
-                          ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Image.asset(
+                          'assets/images/Imagen_de_WhatsApp_2024-08-14_a_las_21.39.45_a7950e54-removebg-preview.png',
+                          width: 300.0,
+                          height: 219.0,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -110,13 +119,17 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 24.0),
                                   child: Text(
-                                    'Cambiar contraseña',
+                                    FFLocalizations.of(context).getText(
+                                      '4susm0wc' /* Cambiar contraseña */,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .displaySmall
                                         .override(
                                           fontFamily: 'Outfit',
                                           color: const Color(0xFF3C7962),
+                                          fontSize:
+                                              FFAppState().Titulos.toDouble(),
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -135,7 +148,10 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                     autofillHints: const [AutofillHints.email],
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'Correo electrónico',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        '1ozpp9t6' /* Correo electrónico */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
@@ -190,6 +206,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: const Color(0xFF0D522C),
+                                          fontSize:
+                                              FFAppState().textosM.toDouble(),
                                           letterSpacing: 0.0,
                                         ),
                                     keyboardType: TextInputType.emailAddress,
@@ -211,7 +229,10 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                     autofillHints: const [AutofillHints.password],
                                     obscureText: !_model.passwordVisibility,
                                     decoration: InputDecoration(
-                                      labelText: 'Contraseña',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        'jd5rrq3k' /* Contraseña */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
@@ -280,6 +301,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         .titleMedium
                                         .override(
                                           fontFamily: 'Readex Pro',
+                                          fontSize:
+                                              FFAppState().textosM.toDouble(),
                                           letterSpacing: 0.0,
                                         ),
                                     validator: _model
@@ -302,7 +325,10 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                     obscureText:
                                         !_model.confirmPasswordVisibility,
                                     decoration: InputDecoration(
-                                      labelText: 'Confirmar contraseña',
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        'vkbvv4t3' /* Confirmar contraseña */,
+                                      ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(
@@ -372,6 +398,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         .titleMedium
                                         .override(
                                           fontFamily: 'Readex Pro',
+                                          fontSize:
+                                              FFAppState().textosM.toDouble(),
                                           letterSpacing: 0.0,
                                         ),
                                     validator: _model
@@ -405,7 +433,9 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         context: context,
                                       );
                                     },
-                                    text: 'Cambiar contraseña',
+                                    text: FFLocalizations.of(context).getText(
+                                      'g8gbmv0m' /* Cambiar contraseña */,
+                                    ),
                                     options: FFButtonOptions(
                                       width: 230.0,
                                       height: 52.0,
@@ -420,6 +450,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: Colors.white,
+                                            fontSize:
+                                                FFAppState().botones.toDouble(),
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
@@ -444,12 +476,18 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         MediaQuery.of(context).textScaler,
                                     text: TextSpan(
                                       children: [
-                                        const TextSpan(
-                                          text: '¿Tienes una cuenta? ',
-                                          style: TextStyle(),
+                                        TextSpan(
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'yuc95r4v' /* ¿Tienes una cuenta?  */,
+                                          ),
+                                          style: const TextStyle(),
                                         ),
                                         TextSpan(
-                                          text: 'Inicie sesión aquí',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '4f3jp504' /* Inicie sesión aquí */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -465,6 +503,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: const Color(0xFF0D522C),
+                                            fontSize:
+                                                FFAppState().textosP.toDouble(),
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -483,12 +523,18 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                         MediaQuery.of(context).textScaler,
                                     text: TextSpan(
                                       children: [
-                                        const TextSpan(
-                                          text: '¿No tienes una cuenta? ',
-                                          style: TextStyle(),
+                                        TextSpan(
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'pyvxngej' /* ¿No tienes una cuenta?  */,
+                                          ),
+                                          style: const TextStyle(),
                                         ),
                                         TextSpan(
-                                          text: 'Registrate aquí',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'pnrn9e72' /* Registrate aquí */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -504,6 +550,8 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: const Color(0xFF0D522C),
+                                            fontSize:
+                                                FFAppState().textosP.toDouble(),
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -516,14 +564,17 @@ class _ForgotpasswordWidgetState extends State<ForgotpasswordWidget> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 12.0, 0.0, 0.0),
                                   child: Text(
-                                    'Derechos reservados.',
+                                    FFLocalizations.of(context).getText(
+                                      'ar2d6bco' /* Derechos reservados. */,
+                                    ),
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .labelLarge
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: const Color(0xFF0D522C),
-                                          fontSize: 14.0,
+                                          fontSize:
+                                              FFAppState().textosP.toDouble(),
                                           letterSpacing: 0.0,
                                         ),
                                   ),

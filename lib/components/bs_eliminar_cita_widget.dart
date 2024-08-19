@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'bs_eliminar_cita_model.dart';
 export 'bs_eliminar_cita_model.dart';
 
@@ -44,6 +45,8 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: 298.0,
       height: 299.0,
@@ -66,10 +69,13 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 0.0, 20.0),
                 child: Text(
-                  'Para confirmar, escribir borrar',
+                  FFLocalizations.of(context).getText(
+                    'io0788v9' /* Para confirmar, escribir borra... */,
+                  ),
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Readex Pro',
+                        fontSize: FFAppState().textosP.toDouble(),
                         letterSpacing: 0.0,
                       ),
                 ),
@@ -89,7 +95,9 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
-                      labelText: 'Borrar',
+                      labelText: FFLocalizations.of(context).getText(
+                        'co378gh6' /* Borrar */,
+                      ),
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
                                 fontFamily: 'Readex Pro',
@@ -131,6 +139,7 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
+                          fontSize: FFAppState().textosM.toDouble(),
                           letterSpacing: 0.0,
                         ),
                     validator: _model.borrarTxtTextControllerValidator
@@ -151,7 +160,9 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                       await widget.eliminarCita!.delete();
                     }
                   },
-                  text: 'Confirmar',
+                  text: FFLocalizations.of(context).getText(
+                    '85b6cc1y' /* Confirmar */,
+                  ),
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
@@ -162,6 +173,7 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.white,
+                          fontSize: FFAppState().botones.toDouble(),
                           letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
