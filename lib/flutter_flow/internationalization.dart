@@ -213,12 +213,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Name',
     },
     'w0qlaqtn': {
-      'es': 'Teléfono',
-      'en': 'Phone',
+      'es': 'Apellidos',
+      'en': 'Last name',
     },
     '1ozpp9t6': {
       'es': 'Correo electrónico',
       'en': 'Email',
+    },
+    'oi40xbpb': {
+      'es': 'Número de teléfono',
+      'en': 'Phone',
     },
     'jd5rrq3k': {
       'es': 'Contraseña',
@@ -364,9 +368,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Editar perfil',
       'en': 'Edit profile',
     },
-    'r4oh54h1': {
-      'es': 'Activo',
-      'en': 'Asset',
+    '52kb67q1': {
+      'es': 'Administrar reservas',
+      'en': '',
+    },
+    '725mhm2w': {
+      'es': 'Administrar servicios',
+      'en': '',
     },
     '8zuhj9cn': {
       'es': 'Lenguaje',
@@ -379,6 +387,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'z2s8svr4': {
       'es': 'Cerrar sesión',
       'en': 'Log out',
+    },
+    'kr3oqwem': {
+      'es': 'Eliminar cuenta',
+      'en': 'Delete account',
     },
     'r8h8dm6e': {
       'es': 'Mi Perfil',
@@ -424,7 +436,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Contact us',
     },
   },
-  // Services
+  // Servicios
   {
     'nlerhwpd': {
       'es': 'Servicios',
@@ -434,13 +446,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'En esta sección puede visualizar y registrar los servicios',
       'en': 'In this section you can view and register the services',
     },
-    'b9kq0nqn': {
-      'es': 'Ofertas',
-      'en': 'Offers',
+    'ys5qi9i9': {
+      'es': 'Servicios Destacados',
+      'en': 'Top services',
+    },
+    'cvlhkazb': {
+      'es': 'Todos los servicios',
+      'en': 'All services',
     },
     'cvds9hjb': {
       'es': 'Hems Spa',
-      'en': '',
+      'en': 'Hems spa',
     },
     'rld394kx': {
       'es': 'Servicios',
@@ -477,12 +493,42 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Contracted services:',
     },
     '131d17sx': {
-      'es': 'Mis citas',
+      'es': 'Servicios',
       'en': 'My quotes',
     },
     'tobhufpg': {
-      'es': 'Mis citas',
+      'es': 'Servicios',
       'en': 'My quotes',
+    },
+  },
+  // MisReservaciones
+  {
+    'qe2maf60': {
+      'es': 'Servicios contratados:',
+      'en': '',
+    },
+    'n9hs3uzy': {
+      'es': 'Mis reservaciones',
+      'en': '',
+    },
+    'ahfhxj3w': {
+      'es': 'Reservas',
+      'en': '',
+    },
+  },
+  // MisReservacionesAdmin
+  {
+    'cscwjhzw': {
+      'es': 'Servicios contratados:',
+      'en': '',
+    },
+    'u6y3a58a': {
+      'es': 'Reservaciones',
+      'en': '',
+    },
+    '6tka8wld': {
+      'es': 'Reservas',
+      'en': '',
     },
   },
   // bs_eliminarCita
@@ -522,6 +568,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Agregar a servicios',
       'en': 'Add to services',
     },
+    '4n0lfii3': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'h8y8mybv': {
+      'es': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the drop-down menu',
+    },
+    '7l1262w5': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'zjw6qjjz': {
+      'es': 'Please choose an option from the dropdown',
+      'en': 'Please choose an option from the drop-down menu',
+    },
+    'd1q8azov': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'r10j53qs': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
+    },
   },
   // bs_editarServicio
   {
@@ -531,7 +601,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fbfemibs': {
       'es': 'Agregar a servicios',
-      'en': '',
+      'en': 'Add service',
     },
   },
   // bs_eliminarServicio
@@ -548,7 +618,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // bs_editarperfil
   {
     'hqghdrxc': {
-      'es': 'Editar cita',
+      'es': 'Editar perfil',
       'en': 'Edit profile',
     },
     'b69a7gk0': {
@@ -640,6 +710,68 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '4zstx73j': {
       'es': 'Grande',
       'en': 'large',
+    },
+  },
+  // bs_eliminarCuenta
+  {
+    'fbqvy91f': {
+      'es': '¿Desea eliminar su cuenta de forma permanente?',
+      'en': '¿Do you want to delete your account permanently?',
+    },
+    'd81vac15': {
+      'es': 'Si',
+      'en': 'Yes',
+    },
+    'hj1uwhhc': {
+      'es': 'Cancelar',
+      'en': 'Cancel',
+    },
+  },
+  // bs_agregarReserva
+  {
+    'grij0g3w': {
+      'es': 'Agregar reserva',
+      'en': '',
+    },
+    'keufqn3e': {
+      'es': 'Nombre del servicio...',
+      'en': '',
+    },
+    'tv9dbgp4': {
+      'es': 'Costo del servicio...',
+      'en': '',
+    },
+    'lgrrpi3i': {
+      'es': 'Descripción...',
+      'en': '',
+    },
+    'k3jpyugn': {
+      'es': 'Agregar a reserva',
+      'en': '',
+    },
+    'jjdm4npz': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'b5ft8kwe': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    'c9z2bx6k': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'j990qgy9': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
+    },
+    '3sy2shb1': {
+      'es': 'Campo requerido',
+      'en': '',
+    },
+    'hrtn5prh': {
+      'es': 'Please choose an option from the dropdown',
+      'en': '',
     },
   },
   // Miscellaneous

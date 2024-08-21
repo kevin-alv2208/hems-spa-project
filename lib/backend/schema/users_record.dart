@@ -20,11 +20,6 @@ class UsersRecord extends FirestoreRecord {
   String get email => _email ?? '';
   bool hasEmail() => _email != null;
 
-  // "display_name" field.
-  String? _displayName;
-  String get displayName => _displayName ?? '';
-  bool hasDisplayName() => _displayName != null;
-
   // "photo_url" field.
   String? _photoUrl;
   String get photoUrl => _photoUrl ?? '';
@@ -45,11 +40,6 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "role" field.
-  String? _role;
-  String get role => _role ?? '';
-  bool hasRole() => _role != null;
-
   // "name" field.
   String? _name;
   String get name => _name ?? '';
@@ -60,16 +50,38 @@ class UsersRecord extends FirestoreRecord {
   String get lastName => _lastName ?? '';
   bool hasLastName() => _lastName != null;
 
+  // "display_name" field.
+  String? _displayName;
+  String get displayName => _displayName ?? '';
+  bool hasDisplayName() => _displayName != null;
+
+  // "isAdmin" field.
+  bool? _isAdmin;
+  bool get isAdmin => _isAdmin ?? false;
+  bool hasIsAdmin() => _isAdmin != null;
+
+  // "isUser" field.
+  bool? _isUser;
+  bool get isUser => _isUser ?? false;
+  bool hasIsUser() => _isUser != null;
+
+  // "rol" field.
+  String? _rol;
+  String get rol => _rol ?? '';
+  bool hasRol() => _rol != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
-    _displayName = snapshotData['display_name'] as String?;
     _photoUrl = snapshotData['photo_url'] as String?;
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _role = snapshotData['role'] as String?;
     _name = snapshotData['name'] as String?;
     _lastName = snapshotData['last_name'] as String?;
+    _displayName = snapshotData['display_name'] as String?;
+    _isAdmin = snapshotData['isAdmin'] as bool?;
+    _isUser = snapshotData['isUser'] as bool?;
+    _rol = snapshotData['rol'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -107,26 +119,30 @@ class UsersRecord extends FirestoreRecord {
 
 Map<String, dynamic> createUsersRecordData({
   String? email,
-  String? displayName,
   String? photoUrl,
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  String? role,
   String? name,
   String? lastName,
+  String? displayName,
+  bool? isAdmin,
+  bool? isUser,
+  String? rol,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'email': email,
-      'display_name': displayName,
       'photo_url': photoUrl,
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'role': role,
       'name': name,
       'last_name': lastName,
+      'display_name': displayName,
+      'isAdmin': isAdmin,
+      'isUser': isUser,
+      'rol': rol,
     }.withoutNulls,
   );
 
@@ -139,27 +155,31 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
     return e1?.email == e2?.email &&
-        e1?.displayName == e2?.displayName &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.role == e2?.role &&
         e1?.name == e2?.name &&
-        e1?.lastName == e2?.lastName;
+        e1?.lastName == e2?.lastName &&
+        e1?.displayName == e2?.displayName &&
+        e1?.isAdmin == e2?.isAdmin &&
+        e1?.isUser == e2?.isUser &&
+        e1?.rol == e2?.rol;
   }
 
   @override
   int hash(UsersRecord? e) => const ListEquality().hash([
         e?.email,
-        e?.displayName,
         e?.photoUrl,
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.role,
         e?.name,
-        e?.lastName
+        e?.lastName,
+        e?.displayName,
+        e?.isAdmin,
+        e?.isUser,
+        e?.rol
       ]);
 
   @override

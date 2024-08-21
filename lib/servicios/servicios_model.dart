@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'services_widget.dart' show ServicesWidget;
+import 'servicios_widget.dart' show ServiciosWidget;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class ServicesModel extends FlutterFlowModel<ServicesWidget> {
+class ServiciosModel extends FlutterFlowModel<ServiciosWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for Carousel widget.

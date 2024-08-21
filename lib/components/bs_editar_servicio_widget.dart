@@ -213,10 +213,15 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                     }
                                   }
 
-                                  await containerServicesRecord.reference
-                                      .update(createServicesRecordData(
-                                    image: _model.uploadedFileUrl,
-                                  ));
+                                  if (_model.uploadedFileUrl != '') {
+                                    await containerServicesRecord.reference
+                                        .update(createServicesRecordData(
+                                      image: _model.uploadedFileUrl,
+                                    ));
+                                    return;
+                                  } else {
+                                    return;
+                                  }
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -792,10 +797,10 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                             onPressed: () async {
                               await containerServicesRecord.reference
                                   .update(createServicesRecordData(
-                                serviceName: '',
-                                description: '',
-                                location: '',
-                                image: '',
+                                description: _model.textController3.text,
+                                location: _model.placePickerValue.address,
+                                cost: int.tryParse(_model.textController2.text),
+                                serviceName: _model.textController1.text,
                               ));
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(

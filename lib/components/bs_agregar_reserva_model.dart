@@ -1,16 +1,11 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'bs_agregar_servicio_widget.dart' show BsAgregarServicioWidget;
+import 'bs_agregar_reserva_widget.dart' show BsAgregarReservaWidget;
 import 'package:flutter/material.dart';
 
-class BsAgregarServicioModel extends FlutterFlowModel<BsAgregarServicioWidget> {
+class BsAgregarReservaModel extends FlutterFlowModel<BsAgregarReservaWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
-
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -18,7 +13,7 @@ class BsAgregarServicioModel extends FlutterFlowModel<BsAgregarServicioWidget> {
   String? _textController1Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '4n0lfii3' /* Campo requerido */,
+        'jjdm4npz' /* Campo requerido */,
       );
     }
 
@@ -32,7 +27,7 @@ class BsAgregarServicioModel extends FlutterFlowModel<BsAgregarServicioWidget> {
   String? _textController2Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        '7l1262w5' /* Campo requerido */,
+        'c9z2bx6k' /* Campo requerido */,
       );
     }
 
@@ -46,15 +41,13 @@ class BsAgregarServicioModel extends FlutterFlowModel<BsAgregarServicioWidget> {
   String? _textController3Validator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
-        'd1q8azov' /* Campo requerido */,
+        '3sy2shb1' /* Campo requerido */,
       );
     }
 
     return null;
   }
 
-  // State field(s) for PlacePicker widget.
-  FFPlace placePickerValue = const FFPlace();
   DateTime? datePicked1;
   DateTime? datePicked2;
 

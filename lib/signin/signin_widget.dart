@@ -31,11 +31,14 @@ class _SigninWidgetState extends State<SigninWidget> {
     _model.nameTextController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
+    _model.lastNameTextController ??= TextEditingController();
+    _model.lastNameFocusNode ??= FocusNode();
+
+    _model.correoTextController ??= TextEditingController();
+    _model.correoFocusNode ??= FocusNode();
+
     _model.telefonoTextController ??= TextEditingController();
     _model.telefonoFocusNode ??= FocusNode();
-
-    _model.emailAddressCreateTextController ??= TextEditingController();
-    _model.emailAddressCreateFocusNode ??= FocusNode();
 
     _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
@@ -182,7 +185,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                               focusNode: _model.nameFocusNode,
                                               autofocus: true,
                                               autofillHints: const [
-                                                AutofillHints.email
+                                                AutofillHints.name
                                               ],
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -264,8 +267,6 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                         .toDouble(),
                                                     letterSpacing: 0.0,
                                                   ),
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
                                               validator: _model
                                                   .nameTextControllerValidator
                                                   .asValidator(context),
@@ -279,19 +280,19 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                     0.0, 0.0, 0.0, 16.0),
                                             child: TextFormField(
                                               controller:
-                                                  _model.telefonoTextController,
+                                                  _model.lastNameTextController,
                                               focusNode:
-                                                  _model.telefonoFocusNode,
+                                                  _model.lastNameFocusNode,
                                               autofocus: true,
                                               autofillHints: const [
-                                                AutofillHints.email
+                                                AutofillHints.name
                                               ],
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText:
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                  'w0qlaqtn' /* Teléfono */,
+                                                  'w0qlaqtn' /* Apellidos */,
                                                 ),
                                                 labelStyle: FlutterFlowTheme.of(
                                                         context)
@@ -366,21 +367,9 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                         .toDouble(),
                                                     letterSpacing: 0.0,
                                                   ),
-                                              maxLength: 9,
-                                              maxLengthEnforcement:
-                                                  MaxLengthEnforcement.enforced,
-                                              buildCounter: (context,
-                                                      {required currentLength,
-                                                      required isFocused,
-                                                      maxLength}) =>
-                                                  null,
-                                              keyboardType: TextInputType.phone,
                                               validator: _model
-                                                  .telefonoTextControllerValidator
+                                                  .lastNameTextControllerValidator
                                                   .asValidator(context),
-                                              inputFormatters: [
-                                                _model.telefonoMask
-                                              ],
                                             ),
                                           ),
                                         ),
@@ -392,12 +381,15 @@ class _SigninWidgetState extends State<SigninWidget> {
                                       child: SizedBox(
                                         width: double.infinity,
                                         child: TextFormField(
-                                          controller: _model
-                                              .emailAddressCreateTextController,
-                                          focusNode: _model
-                                              .emailAddressCreateFocusNode,
+                                          controller:
+                                              _model.correoTextController,
+                                          focusNode: _model.correoFocusNode,
                                           autofocus: true,
-                                          autofillHints: const [AutofillHints.email],
+                                          autofillHints: const [
+                                            AutofillHints.telephoneNumber
+                                          ],
+                                          textCapitalization:
+                                              TextCapitalization.none,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
@@ -473,8 +465,111 @@ class _SigninWidgetState extends State<SigninWidget> {
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           validator: _model
-                                              .emailAddressCreateTextControllerValidator
+                                              .correoTextControllerValidator
                                               .asValidator(context),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        child: TextFormField(
+                                          controller:
+                                              _model.telefonoTextController,
+                                          focusNode: _model.telefonoFocusNode,
+                                          autofocus: true,
+                                          autofillHints: const [AutofillHints.email],
+                                          textCapitalization:
+                                              TextCapitalization.none,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'oi40xbpb' /* Número de teléfono */,
+                                            ),
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: const Color(0xFF0D522C),
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 2.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0),
+                                            ),
+                                            filled: true,
+                                            fillColor: const Color(0xFF77BBA2),
+                                            contentPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 24.0, 0.0, 24.0),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color: const Color(0xFF0D522C),
+                                                fontSize: FFAppState()
+                                                    .textosM
+                                                    .toDouble(),
+                                                letterSpacing: 0.0,
+                                              ),
+                                          maxLength: 9,
+                                          maxLengthEnforcement:
+                                              MaxLengthEnforcement.none,
+                                          buildCounter: (context,
+                                                  {required currentLength,
+                                                  required isFocused,
+                                                  maxLength}) =>
+                                              null,
+                                          keyboardType: TextInputType.phone,
+                                          validator: _model
+                                              .telefonoTextControllerValidator
+                                              .asValidator(context),
+                                          inputFormatters: [
+                                            _model.telefonoMask
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -605,9 +700,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                             final user = await authManager
                                                 .createAccountWithEmail(
                                               context,
-                                              _model
-                                                  .emailAddressCreateTextController
-                                                  .text,
+                                              _model.correoTextController.text,
                                               _model
                                                   .passwordTextController.text,
                                             );
@@ -618,12 +711,15 @@ class _SigninWidgetState extends State<SigninWidget> {
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  displayName: _model
-                                                      .nameTextController.text,
                                                   phoneNumber: _model
                                                       .telefonoTextController
                                                       .text,
-                                                  role: '1',
+                                                  lastName: _model
+                                                      .lastNameTextController
+                                                      .text,
+                                                  displayName: _model
+                                                      .nameTextController.text,
+                                                  rol: 'user',
                                                 ));
 
                                             await authManager
@@ -736,7 +832,7 @@ class _SigninWidgetState extends State<SigninWidget> {
                                                   return;
                                                 }
 
-                                                context.goNamedAuth('Services',
+                                                context.goNamedAuth('Servicios',
                                                     context.mounted);
                                               },
                                               text: FFLocalizations.of(context)

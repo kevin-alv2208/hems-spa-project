@@ -1,25 +1,35 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'bs_agregar_servicio_model.dart';
-export 'bs_agregar_servicio_model.dart';
+import 'bs_agregar_reserva_model.dart';
+export 'bs_agregar_reserva_model.dart';
 
-class BsAgregarServicioWidget extends StatefulWidget {
-  const BsAgregarServicioWidget({super.key});
+class BsAgregarReservaWidget extends StatefulWidget {
+  const BsAgregarReservaWidget({
+    super.key,
+    required this.imageR,
+    required this.nombreR,
+    required this.costoR,
+    required this.descripcionR,
+    required this.locationR,
+  });
+
+  final String? imageR;
+  final String? nombreR;
+  final int? costoR;
+  final String? descripcionR;
+  final String? locationR;
 
   @override
-  State<BsAgregarServicioWidget> createState() =>
-      _BsAgregarServicioWidgetState();
+  State<BsAgregarReservaWidget> createState() => _BsAgregarReservaWidgetState();
 }
 
-class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
-  late BsAgregarServicioModel _model;
+class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
+  late BsAgregarReservaModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -30,15 +40,17 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BsAgregarServicioModel());
+    _model = createModel(context, () => BsAgregarReservaModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController(text: widget.nombreR);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??=
+        TextEditingController(text: widget.costoR?.toString());
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??=
+        TextEditingController(text: widget.descripcionR);
     _model.textFieldFocusNode3 ??= FocusNode();
   }
 
@@ -86,7 +98,7 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'tnd2yhms' /* Agregar servicio */,
+                              'grij0g3w' /* Agregar reserva */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
@@ -124,79 +136,11 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
-                              onTap: () async {
-                                final selectedMedia = await selectMedia(
-                                  maxWidth: 1080.00,
-                                  maxHeight: 1920.00,
-                                  mediaSource: MediaSource.photoGallery,
-                                  multiImage: false,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  setState(() => _model.isDataUploading = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
-
-                                  var downloadUrls = <String>[];
-                                  try {
-                                    showUploadMessage(
-                                      context,
-                                      'Uploading file...',
-                                      showLoading: true,
-                                    );
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                            ))
-                                        .toList();
-
-                                    downloadUrls = (await Future.wait(
-                                      selectedMedia.map(
-                                        (m) async => await uploadData(
-                                            m.storagePath, m.bytes),
-                                      ),
-                                    ))
-                                        .where((u) => u != null)
-                                        .map((u) => u!)
-                                        .toList();
-                                  } finally {
-                                    ScaffoldMessenger.of(context)
-                                        .hideCurrentSnackBar();
-                                    _model.isDataUploading = false;
-                                  }
-                                  if (selectedUploadedFiles.length ==
-                                          selectedMedia.length &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
-                                    setState(() {
-                                      _model.uploadedLocalFile =
-                                          selectedUploadedFiles.first;
-                                      _model.uploadedFileUrl =
-                                          downloadUrls.first;
-                                    });
-                                    showUploadMessage(context, 'Success!');
-                                  } else {
-                                    setState(() {});
-                                    showUploadMessage(
-                                        context, 'Failed to upload data');
-                                    return;
-                                  }
-                                }
-                              },
+                              onTap: () async {},
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
-                                  valueOrDefault<String>(
-                                    _model.uploadedFileUrl,
-                                    'https://cdn-icons-png.flaticon.com/512/1092/1092216.png',
-                                  ),
+                                  widget.imageR!,
                                   width: 150.0,
                                   height: 200.0,
                                   fit: BoxFit.contain,
@@ -215,11 +159,12 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                       controller: _model.textController1,
                                       focusNode: _model.textFieldFocusNode1,
                                       autofocus: true,
+                                      readOnly: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             FFLocalizations.of(context).getText(
-                                          'ths4ai5x' /* Nombre del servicio... */,
+                                          'keufqn3e' /* Nombre del servicio... */,
                                         ),
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -292,11 +237,12 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                       controller: _model.textController2,
                                       focusNode: _model.textFieldFocusNode2,
                                       autofocus: true,
+                                      readOnly: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             FFLocalizations.of(context).getText(
-                                          'h2r6ysk9' /* Costo del servicio... */,
+                                          'tv9dbgp4' /* Costo del servicio... */,
                                         ),
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -368,11 +314,12 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                       controller: _model.textController3,
                                       focusNode: _model.textFieldFocusNode3,
                                       autofocus: true,
+                                      readOnly: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
                                             FFLocalizations.of(context).getText(
-                                          'm827dw95' /* Descripción... */,
+                                          'lgrrpi3i' /* Descripción... */,
                                         ),
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
@@ -437,72 +384,6 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                   ),
                                 ),
                               ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 10.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    _model.placePickerValue.address,
-                                    'No agregada',
-                                  ),
-                                  maxLines: 2,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize:
-                                            FFAppState().textosP.toDouble(),
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ),
-                            FlutterFlowPlacePicker(
-                              iOSGoogleMapsApiKey:
-                                  'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                              androidGoogleMapsApiKey:
-                                  'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                              webGoogleMapsApiKey:
-                                  'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                              onSelect: (place) async {
-                                setState(() => _model.placePickerValue = place);
-                              },
-                              defaultText: '',
-                              icon: Icon(
-                                Icons.place,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 16.0,
-                              ),
-                              buttonOptions: FFButtonOptions(
-                                width: 120.0,
-                                height: 40.0,
-                                color: const Color(0xFF77BBA2),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: FlutterFlowTheme.of(context).info,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 2.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
                             ),
                           ],
                         ),
@@ -694,40 +575,6 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                 !_model.formKey.currentState!.validate()) {
                               return;
                             }
-                            if (_model.uploadedFileUrl.isEmpty) {
-                              ScaffoldMessenger.of(context).clearSnackBars();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: const Text(
-                                    'Debe ingresar una imagen',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 2000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
-                              );
-                              return;
-                            }
-                            if (_model.placePickerValue == const FFPlace()) {
-                              ScaffoldMessenger.of(context).clearSnackBars();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: const Text(
-                                    'Debe ingresar una dirección',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 2000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
-                              );
-                              return;
-                            }
                             if (_model.datePicked1 == null) {
                               ScaffoldMessenger.of(context).clearSnackBars();
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -763,20 +610,17 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                               return;
                             }
 
-                            await ServicesRecord.collection
+                            await ReservaRecord.collection
                                 .doc()
-                                .set(createServicesRecordData(
+                                .set(createReservaRecordData(
                                   serviceName: _model.textController1.text,
                                   description: _model.textController3.text,
                                   appointmentDate: _model.datePicked1,
-                                  location: valueOrDefault<String>(
-                                    _model.placePickerValue.address,
-                                    'No ingresada',
-                                  ),
-                                  image: _model.uploadedFileUrl,
+                                  image: widget.imageR,
                                   appointmentTime: _model.datePicked2,
                                   cost:
                                       int.tryParse(_model.textController2.text),
+                                  idUsuario: currentUserUid,
                                 ));
                             setState(() {
                               _model.textController1?.clear();
@@ -786,7 +630,7 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Su servicio ha sido agregado',
+                                  'Su reserva ha sido agregada',
                                   style: FlutterFlowTheme.of(context)
                                       .displaySmall
                                       .override(
@@ -802,7 +646,7 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                             );
                           },
                           text: FFLocalizations.of(context).getText(
-                            '64di19i9' /* Agregar a servicios */,
+                            'k3jpyugn' /* Agregar a reserva */,
                           ),
                           icon: const Icon(
                             Icons.save_rounded,

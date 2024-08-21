@@ -1,32 +1,47 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/bs_editar_servicio_widget.dart';
-import '/components/bs_eliminar_servicio_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'mis_servicios_model.dart';
-export 'mis_servicios_model.dart';
+import 'mis_reservaciones_admin_model.dart';
+export 'mis_reservaciones_admin_model.dart';
 
-class MisServiciosWidget extends StatefulWidget {
-  const MisServiciosWidget({super.key});
+class MisReservacionesAdminWidget extends StatefulWidget {
+  const MisReservacionesAdminWidget({super.key});
 
   @override
-  State<MisServiciosWidget> createState() => _MisServiciosWidgetState();
+  State<MisReservacionesAdminWidget> createState() =>
+      _MisReservacionesAdminWidgetState();
 }
 
-class _MisServiciosWidgetState extends State<MisServiciosWidget> {
-  late MisServiciosModel _model;
+class _MisReservacionesAdminWidgetState
+    extends State<MisReservacionesAdminWidget> {
+  late MisReservacionesAdminModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MisServiciosModel());
+    _model = createModel(context, () => MisReservacionesAdminModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (valueOrDefault(currentUserDocument?.rol, '') == 'admin') {
+        await queryReservaRecordOnce();
+      } else {
+        await queryReservaRecordOnce(
+          queryBuilder: (reservaRecord) => reservaRecord.where(
+            'idUsuario',
+            isEqualTo: currentUserUid,
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -40,8 +55,8 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<List<ServicesRecord>>(
-      stream: queryServicesRecord(),
+    return StreamBuilder<List<ReservaRecord>>(
+      stream: queryReservaRecord(),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -60,7 +75,8 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
             ),
           );
         }
-        List<ServicesRecord> misServiciosServicesRecordList = snapshot.data!;
+        List<ReservaRecord> misReservacionesAdminReservaRecordList =
+            snapshot.data!;
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -81,12 +97,12 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pop();
+                  context.pushNamed('Perfil');
                 },
               ),
               title: Text(
                 FFLocalizations.of(context).getText(
-                  '131d17sx' /* Servicios */,
+                  'u6y3a58a' /* Reservaciones */,
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
@@ -119,7 +135,7 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                                 16.0, 12.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'rwxw9ynf' /* Servicios contratados: */,
+                                'cscwjhzw' /* Servicios contratados: */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .labelMedium
@@ -134,7 +150,7 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 4.0, 12.0, 16.0, 0.0),
                             child: FutureBuilder<int>(
-                              future: queryServicesRecordCount(),
+                              future: queryReservaRecordCount(),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -175,7 +191,7 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                         child: Builder(
                           builder: (context) {
                             final listaServicios =
-                                misServiciosServicesRecordList
+                                misReservacionesAdminReservaRecordList
                                     .map((e) => e)
                                     .toList();
 
@@ -221,7 +237,10 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(6.0),
                                               child: Image.network(
-                                                listaServiciosItem.image,
+                                                valueOrDefault<String>(
+                                                  listaServiciosItem.image,
+                                                  'https://cdn-icons-png.flaticon.com/128/1057/1057315.png',
+                                                ),
                                                 width: 80.0,
                                                 height: 80.0,
                                                 fit: BoxFit.cover,
@@ -354,7 +373,7 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                                                             currentUserDocument
                                                                 ?.rol,
                                                             '') ==
-                                                        'admin',
+                                                        'user',
                                                     false,
                                                   ))
                                                     Padding(
@@ -368,110 +387,23 @@ class _MisServiciosWidgetState extends State<MisServiciosWidget> {
                                                       child:
                                                           AuthUserStreamWidget(
                                                         builder: (context) =>
-                                                            InkWell(
-                                                          splashColor: Colors
-                                                              .transparent,
-                                                          focusColor: Colors
-                                                              .transparent,
-                                                          hoverColor: Colors
-                                                              .transparent,
-                                                          highlightColor: Colors
-                                                              .transparent,
-                                                          onTap: () async {
-                                                            await showModalBottomSheet(
-                                                              isScrollControlled:
-                                                                  true,
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              enableDrag: false,
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return GestureDetector(
-                                                                  onTap: () =>
-                                                                      FocusScope.of(
-                                                                              context)
-                                                                          .unfocus(),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: MediaQuery
-                                                                        .viewInsetsOf(
-                                                                            context),
-                                                                    child:
-                                                                        BsEditarServicioWidget(
-                                                                      editarDatosServicios:
-                                                                          listaServiciosItem
-                                                                              .reference,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ).then((value) =>
-                                                                safeSetState(
-                                                                    () {}));
-                                                          },
-                                                          child: const Icon(
-                                                            Icons.edit_square,
-                                                            color: Color(
-                                                                0xFF77BBA2),
-                                                            size: 24.0,
-                                                          ),
+                                                            const Icon(
+                                                          Icons.edit_square,
+                                                          color:
+                                                              Color(0xFF77BBA2),
+                                                          size: 24.0,
                                                         ),
                                                       ),
                                                     ),
-                                                  Padding(
+                                                  const Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await showModalBottomSheet(
-                                                          isScrollControlled:
-                                                              true,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          enableDrag: false,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return GestureDetector(
-                                                              onTap: () =>
-                                                                  FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: Padding(
-                                                                padding: MediaQuery
-                                                                    .viewInsetsOf(
-                                                                        context),
-                                                                child:
-                                                                    BsEliminarServicioWidget(
-                                                                  eliminarServicio:
-                                                                      listaServiciosItem
-                                                                          .reference,
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ).then((value) =>
-                                                            safeSetState(
-                                                                () {}));
-                                                      },
-                                                      child: const Icon(
-                                                        Icons.delete_outline,
-                                                        color:
-                                                            Color(0xFFFF0000),
-                                                        size: 24.0,
-                                                      ),
+                                                    child: Icon(
+                                                      Icons.delete_outline,
+                                                      color: Color(0xFFFF0000),
+                                                      size: 24.0,
                                                     ),
                                                   ),
                                                 ],

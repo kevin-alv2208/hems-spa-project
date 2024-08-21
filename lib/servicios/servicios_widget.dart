@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/bs_agregar_servicio_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -5,25 +6,25 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'services_model.dart';
-export 'services_model.dart';
+import 'servicios_model.dart';
+export 'servicios_model.dart';
 
-class ServicesWidget extends StatefulWidget {
-  const ServicesWidget({super.key});
+class ServiciosWidget extends StatefulWidget {
+  const ServiciosWidget({super.key});
 
   @override
-  State<ServicesWidget> createState() => _ServicesWidgetState();
+  State<ServiciosWidget> createState() => _ServiciosWidgetState();
 }
 
-class _ServicesWidgetState extends State<ServicesWidget> {
-  late ServicesModel _model;
+class _ServiciosWidgetState extends State<ServiciosWidget> {
+  late ServiciosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ServicesModel());
+    _model = createModel(context, () => ServiciosModel());
   }
 
   @override
@@ -61,37 +62,48 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             ),
           );
         }
-        List<ServicesRecord> servicesServicesRecordList = snapshot.data!;
+        List<ServicesRecord> serviciosServicesRecordList = snapshot.data!;
 
         return GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                await showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  enableDrag: false,
-                  context: context,
-                  builder: (context) {
-                    return GestureDetector(
-                      onTap: () => FocusScope.of(context).unfocus(),
-                      child: Padding(
-                        padding: MediaQuery.viewInsetsOf(context),
-                        child: const BsAgregarServicioWidget(),
+            floatingActionButton: Visibility(
+              visible: valueOrDefault(currentUserDocument?.rol, '') == 'admin',
+              child: Align(
+                alignment: const AlignmentDirectional(1.0, 1.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
+                  child: AuthUserStreamWidget(
+                    builder: (context) => FloatingActionButton(
+                      onPressed: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const BsAgregarServicioWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                      backgroundColor: const Color(0xFF3C7962),
+                      elevation: 8.0,
+                      child: Icon(
+                        Icons.add,
+                        color: FlutterFlowTheme.of(context).info,
+                        size: 24.0,
                       ),
-                    );
-                  },
-                ).then((value) => safeSetState(() {}));
-              },
-              backgroundColor: const Color(0xFF3C7962),
-              elevation: 8.0,
-              child: Icon(
-                Icons.add,
-                color: FlutterFlowTheme.of(context).info,
-                size: 24.0,
+                    ),
+                  ),
+                ),
               ),
             ),
             appBar: AppBar(
@@ -233,7 +245,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         children: [
                           Text(
                             FFLocalizations.of(context).getText(
-                              'b9kq0nqn' /* Ofertas */,
+                              'ys5qi9i9' /* Servicios Destacados */,
                             ),
                             textAlign: TextAlign.center,
                             maxLines: 2,
@@ -259,7 +271,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                 0.0, 10.0, 0.0, 10.0),
                             child: Builder(
                               builder: (context) {
-                                final listaOfertas = servicesServicesRecordList
+                                final listaOfertas = serviciosServicesRecordList
                                     .map((e) => e)
                                     .toList();
 
@@ -445,7 +457,32 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 2.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'cvlhkazb' /* Todos los servicios */,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: const Color(0xFF3C7962),
+                                  fontSize: FFAppState().textosM.toDouble(),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(2.0, 5.0, 2.0, 0.0),
                       child: Container(
                         width: double.infinity,
                         constraints: const BoxConstraints(
@@ -492,7 +529,8 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                   ),
                                 );
                               }
-                              List<ServicesRecord> gridViewServicesRecordList =
+                              List<ServicesRecord>
+                                  gridViewTServiciosServicesRecordList =
                                   snapshot.data!;
 
                               return GridView.builder(
@@ -506,10 +544,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                 ),
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: gridViewServicesRecordList.length,
-                                itemBuilder: (context, gridViewIndex) {
-                                  final gridViewServicesRecord =
-                                      gridViewServicesRecordList[gridViewIndex];
+                                itemCount:
+                                    gridViewTServiciosServicesRecordList.length,
+                                itemBuilder:
+                                    (context, gridViewTServiciosIndex) {
+                                  final gridViewTServiciosServicesRecord =
+                                      gridViewTServiciosServicesRecordList[
+                                          gridViewTServiciosIndex];
                                   return Stack(
                                     children: [
                                       Padding(
@@ -518,7 +559,8 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           child: Image.network(
-                                            gridViewServicesRecord.image,
+                                            gridViewTServiciosServicesRecord
+                                                .image,
                                             width: double.infinity,
                                             height: double.infinity,
                                             fit: BoxFit.cover,
@@ -538,13 +580,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                               queryParameters: {
                                                 'detalleServicio':
                                                     serializeParam(
-                                                  gridViewServicesRecord,
+                                                  gridViewTServiciosServicesRecord,
                                                   ParamType.Document,
                                                 ),
                                               }.withoutNulls,
                                               extra: <String, dynamic>{
                                                 'detalleServicio':
-                                                    gridViewServicesRecord,
+                                                    gridViewTServiciosServicesRecord,
                                                 kTransitionInfoKey:
                                                     const TransitionInfo(
                                                   hasTransition: true,
@@ -588,7 +630,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(4.0, 0.0, 4.0, 0.0),
                                               child: Text(
-                                                gridViewServicesRecord
+                                                gridViewTServiciosServicesRecord
                                                     .serviceName,
                                                 maxLines: 3,
                                                 style:

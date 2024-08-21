@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/bs_editarperfil_widget.dart';
+import '/components/bs_eliminar_cuenta_widget.dart';
 import '/components/bs_fuentes_widget.dart';
 import '/components/bs_idioma_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -114,6 +115,26 @@ class _PerfilWidgetState extends State<PerfilWidget>
           ),
         ],
       ),
+      'textOnPageLoadAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
       'dividerOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -157,6 +178,26 @@ class _PerfilWidgetState extends State<PerfilWidget>
       'containerOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
           VisibilityEffect(duration: 200.ms),
           FadeEffect(
             curve: Curves.easeInOut,
@@ -174,7 +215,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
           ),
         ],
       ),
-      'containerOnPageLoadAnimation3': AnimationInfo(
+      'containerOnPageLoadAnimation4': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 300.ms),
@@ -194,7 +235,27 @@ class _PerfilWidgetState extends State<PerfilWidget>
           ),
         ],
       ),
-      'buttonOnPageLoadAnimation': AnimationInfo(
+      'buttonOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 400.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation2': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           VisibilityEffect(duration: 400.ms),
@@ -278,7 +339,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                         child: Image.network(
                           valueOrDefault<String>(
                             currentUserPhoto,
-                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+                            'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
                           ),
                           width: 100.0,
                           height: 100.0,
@@ -348,6 +409,22 @@ class _PerfilWidgetState extends State<PerfilWidget>
                 ),
               ),
               Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                child: AuthUserStreamWidget(
+                  builder: (context) => Text(
+                    valueOrDefault(currentUserDocument?.lastName, ''),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Outfit',
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          fontSize: FFAppState().textosM.toDouble(),
+                          letterSpacing: 0.0,
+                        ),
+                  ).animateOnPageLoad(
+                      animationsMap['textOnPageLoadAnimation2']!),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
                 child: Text(
                   currentUserEmail,
@@ -357,7 +434,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                         fontSize: FFAppState().textosM.toDouble(),
                         letterSpacing: 0.0,
                       ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation2']!),
+                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation3']!),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
@@ -372,7 +449,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                           letterSpacing: 0.0,
                         ),
                   ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation3']!),
+                      animationsMap['textOnPageLoadAnimation4']!),
                 ),
               ),
               Divider(
@@ -382,67 +459,135 @@ class _PerfilWidgetState extends State<PerfilWidget>
                 endIndent: 24.0,
                 color: FlutterFlowTheme.of(context).alternate,
               ).animateOnPageLoad(animationsMap['dividerOnPageLoadAnimation']!),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                    borderRadius: BorderRadius.circular(12.0),
-                    border: Border.all(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
+              if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: AuthUserStreamWidget(
+                    builder: (context) => InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('MisReservacionesAdmin');
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2.0,
+                          ),
+                        ),
+                        child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 0.0, 0.0),
-                          child: Icon(
-                            Icons.power_settings_new_rounded,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                        ),
-                        Expanded(
-                          child: SwitchListTile.adaptive(
-                            value: _model.switchListTileValue ??= true,
-                            onChanged: (newValue) async {
-                              setState(
-                                  () => _model.switchListTileValue = newValue);
-                            },
-                            title: Text(
-                              FFLocalizations.of(context).getText(
-                                'r4oh54h1' /* Activo */,
+                              8.0, 12.0, 8.0, 12.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.calendar_month_rounded,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: FFAppState().textosP.toDouble(),
-                                    letterSpacing: 0.0,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    '52kb67q1' /* Administrar reservas */,
                                   ),
-                            ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            activeColor: FlutterFlowTheme.of(context).secondary,
-                            activeTrackColor: const Color(0x3439D2C0),
-                            dense: false,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 4.0, 0.0),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize:
+                                            FFAppState().textosP.toDouble(),
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation1']!),
                   ),
-                ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation1']!),
-              ),
+                ),
+              if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                  child: AuthUserStreamWidget(
+                    builder: (context) => InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('MisServicios');
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 2.0,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 12.0, 8.0, 12.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Icon(
+                                  Icons.spa,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    '725mhm2w' /* Administrar servicios */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize:
+                                            FFAppState().textosP.toDouble(),
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation2']!),
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                 child: InkWell(
@@ -513,7 +658,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                     ),
                   ),
                 ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation2']!),
+                    animationsMap['containerOnPageLoadAnimation3']!),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
@@ -585,7 +730,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                     ),
                   ),
                 ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation3']!),
+                    animationsMap['containerOnPageLoadAnimation4']!),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -620,7 +765,52 @@ class _PerfilWidgetState extends State<PerfilWidget>
                     borderRadius: BorderRadius.circular(38.0),
                   ),
                 ).animateOnPageLoad(
-                    animationsMap['buttonOnPageLoadAnimation']!),
+                    animationsMap['buttonOnPageLoadAnimation1']!),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return GestureDetector(
+                          onTap: () => FocusScope.of(context).unfocus(),
+                          child: Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: const BsEliminarCuentaWidget(),
+                          ),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  text: FFLocalizations.of(context).getText(
+                    'kr3oqwem' /* Eliminar cuenta */,
+                  ),
+                  options: FFButtonOptions(
+                    width: 150.0,
+                    height: 44.0,
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).error,
+                    textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Readex Pro',
+                          fontSize: FFAppState().botones.toDouble(),
+                          letterSpacing: 0.0,
+                        ),
+                    elevation: 0.0,
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(38.0),
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['buttonOnPageLoadAnimation2']!),
               ),
             ],
           ),

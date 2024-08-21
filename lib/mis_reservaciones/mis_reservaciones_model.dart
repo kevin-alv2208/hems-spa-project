@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'perfil_widget.dart' show PerfilWidget;
+import 'mis_reservaciones_widget.dart' show MisReservacionesWidget;
 import 'package:flutter/material.dart';
 
-class PerfilModel extends FlutterFlowModel<PerfilWidget> {
+class MisReservacionesModel extends FlutterFlowModel<MisReservacionesWidget> {
   @override
   void initState(BuildContext context) {}
 

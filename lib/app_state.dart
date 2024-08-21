@@ -58,6 +58,12 @@ class FFAppState extends ChangeNotifier {
   set botones(int value) {
     _botones = value;
   }
+
+  bool _buscador = false;
+  bool get buscador => _buscador;
+  set buscador(bool value) {
+    _buscador = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

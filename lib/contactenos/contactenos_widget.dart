@@ -102,7 +102,7 @@ class _ContactenosWidgetState extends State<ContactenosWidget> {
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   color: const Color(0xFF3C7962),
-                                  fontSize: FFAppState().textosM.toDouble(),
+                                  fontSize: FFAppState().Titulos.toDouble(),
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                 ),

@@ -12,7 +12,20 @@
           "package_name": "com.fidelitas.hemsspa"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "582563642316-ecab0h0varvo4p07gthe1n0ssknrul09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidelitas.hemsspa",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "582563642316-ou88ffs6sknldmhvpcagiohrq9iq0p8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAppfZJ-d7Z3MtAD1EpJ2VAdqbkokM7m6g"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582563642316-ou88ffs6sknldmhvpcagiohrq9iq0p8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "582563642316-9e2rboafm6k9ev25mh2b38ian3uc116q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fidelitas.hemsspa"
+              }
+            }
+          ]
         }
       }
     }

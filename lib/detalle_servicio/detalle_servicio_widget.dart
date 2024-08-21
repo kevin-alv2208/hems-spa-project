@@ -1,5 +1,5 @@
 import '/backend/backend.dart';
-import '/components/bs_agregar_servicio_widget.dart';
+import '/components/bs_agregar_reserva_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -316,7 +316,13 @@ class _DetalleServicioWidgetState extends State<DetalleServicioWidget> {
                     builder: (context) {
                       return Padding(
                         padding: MediaQuery.viewInsetsOf(context),
-                        child: const BsAgregarServicioWidget(),
+                        child: BsAgregarReservaWidget(
+                          imageR: widget.detalleServicio!.image,
+                          nombreR: widget.detalleServicio!.serviceName,
+                          costoR: widget.detalleServicio!.cost,
+                          descripcionR: widget.detalleServicio!.description,
+                          locationR: widget.detalleServicio!.location,
+                        ),
                       );
                     },
                   ).then((value) => safeSetState(() {}));

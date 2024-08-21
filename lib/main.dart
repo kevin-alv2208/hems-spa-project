@@ -7,7 +7,7 @@ import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
 import 'backend/firebase/firebase_config.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
@@ -120,7 +120,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Services';
+  String _currentPageName = 'Servicios';
   late Widget? _currentPage;
 
   @override
@@ -133,10 +133,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Services': const ServicesWidget(),
-      'MisServicios': const MisServiciosWidget(),
+      'Servicios': const ServiciosWidget(),
       'Contactenos': const ContactenosWidget(),
       'Perfil': const PerfilWidget(),
+      'MisReservaciones': const MisReservacionesWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -171,7 +171,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.home_outlined,
+                  Icons.spa,
                   color: currentIndex == 0
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -197,7 +197,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.calendar_month_rounded,
+                  Icons.phone_rounded,
                   color: currentIndex == 1
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -205,7 +205,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    'tobhufpg' /* Mis citas */,
+                    '4i90j1xz' /* Contáctenos */,
                   ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -223,7 +223,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.phone_rounded,
+                  Icons.account_circle_outlined,
                   color: currentIndex == 2
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -231,7 +231,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    '4i90j1xz' /* Contáctenos */,
+                    'fbv268if' /* Perfil */,
                   ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -249,7 +249,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.account_circle_outlined,
+                  Icons.calendar_month_rounded,
                   color: currentIndex == 3
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -257,7 +257,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    'fbv268if' /* Perfil */,
+                    'ahfhxj3w' /* Reservas */,
                   ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

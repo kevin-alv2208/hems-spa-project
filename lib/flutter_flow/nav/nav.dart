@@ -117,11 +117,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
         ),
         FFRoute(
-          name: 'Services',
-          path: '/services',
+          name: 'Servicios',
+          path: '/servicios',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Services')
-              : const ServicesWidget(),
+              ? const NavBarPage(initialPage: 'Servicios')
+              : const ServiciosWidget(),
         ),
         FFRoute(
           name: 'DetalleServicio',
@@ -140,9 +140,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'MisServicios',
           path: '/misServicios',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: MisServiciosWidget(),
+          ),
+        ),
+        FFRoute(
+          name: 'MisReservaciones',
+          path: '/misReservaciones',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'MisServicios')
-              : const MisServiciosWidget(),
+              ? const NavBarPage(initialPage: 'MisReservaciones')
+              : const NavBarPage(
+                  initialPage: 'MisReservaciones',
+                  page: MisReservacionesWidget(),
+                ),
+        ),
+        FFRoute(
+          name: 'MisReservacionesAdmin',
+          path: '/misReservacionesAdmin',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: MisReservacionesAdminWidget(),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

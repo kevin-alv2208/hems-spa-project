@@ -537,7 +537,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
                                         if (currentUserEmailVerified == true) {
                                           context.pushNamedAuth(
-                                            'Services',
+                                            'Servicios',
                                             context.mounted,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
@@ -654,7 +654,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             }
 
                                             context.goNamedAuth(
-                                                'Services', context.mounted);
+                                                'Servicios', context.mounted);
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(

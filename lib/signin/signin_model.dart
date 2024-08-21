@@ -11,18 +11,15 @@ class SigninModel extends FlutterFlowModel<SigninWidget> {
   FocusNode? nameFocusNode;
   TextEditingController? nameTextController;
   String? Function(BuildContext, String?)? nameTextControllerValidator;
-  // State field(s) for telefono widget.
-  FocusNode? telefonoFocusNode;
-  TextEditingController? telefonoTextController;
-  final telefonoMask = MaskTextInputFormatter(mask: '####-####');
-  String? Function(BuildContext, String?)? telefonoTextControllerValidator;
-  // State field(s) for emailAddress_Create widget.
-  FocusNode? emailAddressCreateFocusNode;
-  TextEditingController? emailAddressCreateTextController;
-  String? Function(BuildContext, String?)?
-      emailAddressCreateTextControllerValidator;
-  String? _emailAddressCreateTextControllerValidator(
-      BuildContext context, String? val) {
+  // State field(s) for lastName widget.
+  FocusNode? lastNameFocusNode;
+  TextEditingController? lastNameTextController;
+  String? Function(BuildContext, String?)? lastNameTextControllerValidator;
+  // State field(s) for correo widget.
+  FocusNode? correoFocusNode;
+  TextEditingController? correoTextController;
+  String? Function(BuildContext, String?)? correoTextControllerValidator;
+  String? _correoTextControllerValidator(BuildContext context, String? val) {
     if (val == null || val.isEmpty) {
       return FFLocalizations.of(context).getText(
         'yz43ua72' /* Este campo es requerido */,
@@ -47,6 +44,11 @@ class SigninModel extends FlutterFlowModel<SigninWidget> {
     return null;
   }
 
+  // State field(s) for telefono widget.
+  FocusNode? telefonoFocusNode;
+  TextEditingController? telefonoTextController;
+  final telefonoMask = MaskTextInputFormatter(mask: '####-####');
+  String? Function(BuildContext, String?)? telefonoTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
   TextEditingController? passwordTextController;
@@ -81,8 +83,7 @@ class SigninModel extends FlutterFlowModel<SigninWidget> {
 
   @override
   void initState(BuildContext context) {
-    emailAddressCreateTextControllerValidator =
-        _emailAddressCreateTextControllerValidator;
+    correoTextControllerValidator = _correoTextControllerValidator;
     passwordVisibility = false;
     passwordTextControllerValidator = _passwordTextControllerValidator;
   }
@@ -92,11 +93,14 @@ class SigninModel extends FlutterFlowModel<SigninWidget> {
     nameFocusNode?.dispose();
     nameTextController?.dispose();
 
+    lastNameFocusNode?.dispose();
+    lastNameTextController?.dispose();
+
+    correoFocusNode?.dispose();
+    correoTextController?.dispose();
+
     telefonoFocusNode?.dispose();
     telefonoTextController?.dispose();
-
-    emailAddressCreateFocusNode?.dispose();
-    emailAddressCreateTextController?.dispose();
 
     passwordFocusNode?.dispose();
     passwordTextController?.dispose();
