@@ -1,7 +1,9 @@
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'bs_eliminar_cita_model.dart';
 export 'bs_eliminar_cita_model.dart';
@@ -18,8 +20,11 @@ class BsEliminarCitaWidget extends StatefulWidget {
   State<BsEliminarCitaWidget> createState() => _BsEliminarCitaWidgetState();
 }
 
-class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
+class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget>
+    with TickerProviderStateMixin {
   late BsEliminarCitaModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -34,6 +39,66 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
 
     _model.borrarTxtTextController ??= TextEditingController();
     _model.borrarTxtFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'textOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'textFieldOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -78,7 +143,7 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                         fontSize: FFAppState().textosP.toDouble(),
                         letterSpacing: 0.0,
                       ),
-                ),
+                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
               ),
             ],
           ),
@@ -144,7 +209,8 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                         ),
                     validator: _model.borrarTxtTextControllerValidator
                         .asValidator(context),
-                  ),
+                  ).animateOnPageLoad(
+                      animationsMap['textFieldOnPageLoadAnimation']!),
                 ),
               ),
             ],
@@ -183,7 +249,8 @@ class _BsEliminarCitaWidgetState extends State<BsEliminarCitaWidget> {
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                ),
+                ).animateOnPageLoad(
+                    animationsMap['buttonOnPageLoadAnimation']!),
               ),
             ],
           ),

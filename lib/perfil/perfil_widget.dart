@@ -320,156 +320,323 @@ class _PerfilWidgetState extends State<PerfilWidget>
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: AuthUserStreamWidget(
-                      builder: (context) => ClipRRect(
-                        borderRadius: BorderRadius.circular(60.0),
-                        child: Image.network(
-                          valueOrDefault<String>(
-                            currentUserPhoto,
-                            'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
+          child: Align(
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            child: Container(
+              constraints: const BoxConstraints(
+                maxWidth: 600.0,
+              ),
+              decoration: const BoxDecoration(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                    child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => Hero(
+                            tag: valueOrDefault<String>(
+                              currentUserPhoto,
+                              'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
+                            ),
+                            transitionOnUserGestures: true,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(60.0),
+                              child: Image.network(
+                                valueOrDefault<String>(
+                                  currentUserPhoto,
+                                  'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
+                                ),
+                                width: 100.0,
+                                height: 100.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          width: 100.0,
-                          height: 100.0,
-                          fit: BoxFit.cover,
                         ),
                       ),
-                    ),
+                    ).animateOnPageLoad(
+                        animationsMap['cardOnPageLoadAnimation']!),
                   ),
-                ).animateOnPageLoad(animationsMap['cardOnPageLoadAnimation']!),
-              ),
-              FFButtonWidget(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    enableDrag: false,
-                    context: context,
-                    builder: (context) {
-                      return GestureDetector(
-                        onTap: () => FocusScope.of(context).unfocus(),
-                        child: Padding(
-                          padding: MediaQuery.viewInsetsOf(context),
-                          child: const BsEditarperfilWidget(),
-                        ),
-                      );
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () => FocusScope.of(context).unfocus(),
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: const BsEditarperfilWidget(),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
                     },
-                  ).then((value) => safeSetState(() {}));
-                },
-                text: FFLocalizations.of(context).getText(
-                  'psbb8erh' /* Editar perfil */,
-                ),
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                  iconPadding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Colors.white,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Readex Pro',
-                        color: Colors.black,
-                        fontSize: FFAppState().botones.toDouble(),
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.normal,
+                    text: FFLocalizations.of(context).getText(
+                      'psbb8erh' /* Editar perfil */,
+                    ),
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: Colors.white,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Readex Pro',
+                                color: Colors.black,
+                                fontSize: FFAppState().botones.toDouble(),
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                      elevation: 3.0,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
                       ),
-                  elevation: 3.0,
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                child: AuthUserStreamWidget(
-                  builder: (context) => Text(
-                    currentUserDisplayName,
-                    style: FlutterFlowTheme.of(context).headlineSmall.override(
-                          fontFamily: 'Outfit',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          fontSize: FFAppState().textosM.toDouble(),
-                          letterSpacing: 0.0,
-                        ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        currentUserDisplayName,
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  fontSize: FFAppState().textosM.toDouble(),
+                                  letterSpacing: 0.0,
+                                ),
+                      ).animateOnPageLoad(
+                          animationsMap['textOnPageLoadAnimation1']!),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        valueOrDefault(currentUserDocument?.lastName, ''),
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  fontSize: FFAppState().textosM.toDouble(),
+                                  letterSpacing: 0.0,
+                                ),
+                      ).animateOnPageLoad(
+                          animationsMap['textOnPageLoadAnimation2']!),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
+                    child: Text(
+                      currentUserEmail,
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            fontSize: FFAppState().textosM.toDouble(),
+                            letterSpacing: 0.0,
+                          ),
+                    ).animateOnPageLoad(
+                        animationsMap['textOnPageLoadAnimation3']!),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => Text(
+                        currentPhoneNumber,
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily: 'Readex Pro',
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              fontSize: FFAppState().textosM.toDouble(),
+                              letterSpacing: 0.0,
+                            ),
+                      ).animateOnPageLoad(
+                          animationsMap['textOnPageLoadAnimation4']!),
+                    ),
+                  ),
+                  Divider(
+                    height: 44.0,
+                    thickness: 1.0,
+                    indent: 24.0,
+                    endIndent: 24.0,
+                    color: FlutterFlowTheme.of(context).alternate,
                   ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation1']!),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                child: AuthUserStreamWidget(
-                  builder: (context) => Text(
-                    valueOrDefault(currentUserDocument?.lastName, ''),
-                    style: FlutterFlowTheme.of(context).headlineSmall.override(
-                          fontFamily: 'Outfit',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          fontSize: FFAppState().textosM.toDouble(),
-                          letterSpacing: 0.0,
-                        ),
-                  ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation2']!),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
-                child: Text(
-                  currentUserEmail,
-                  style: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Readex Pro',
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        fontSize: FFAppState().textosM.toDouble(),
-                        letterSpacing: 0.0,
+                      animationsMap['dividerOnPageLoadAnimation']!),
+                  if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('MisReservacionesAdmin');
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 12.0, 8.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.calendar_month_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '52kb67q1' /* Administrar reservas */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize:
+                                                FFAppState().textosP.toDouble(),
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['containerOnPageLoadAnimation1']!),
                       ),
-                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation3']!),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 4.0),
-                child: AuthUserStreamWidget(
-                  builder: (context) => Text(
-                    currentPhoneNumber,
-                    style: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          fontSize: FFAppState().textosM.toDouble(),
-                          letterSpacing: 0.0,
-                        ),
-                  ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation4']!),
-                ),
-              ),
-              Divider(
-                height: 44.0,
-                thickness: 1.0,
-                indent: 24.0,
-                endIndent: 24.0,
-                color: FlutterFlowTheme.of(context).alternate,
-              ).animateOnPageLoad(animationsMap['dividerOnPageLoadAnimation']!),
-              if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                  child: AuthUserStreamWidget(
-                    builder: (context) => InkWell(
+                    ),
+                  if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                      child: AuthUserStreamWidget(
+                        builder: (context) => InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('MisServicios');
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 12.0, 8.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Icon(
+                                      Icons.spa,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '725mhm2w' /* Administrar servicios */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize:
+                                                FFAppState().textosP.toDouble(),
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['containerOnPageLoadAnimation2']!),
+                      ),
+                    ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('MisReservacionesAdmin');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const BsIdiomaWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
                       },
                       child: Container(
                         width: double.infinity,
@@ -490,9 +657,9 @@ class _PerfilWidgetState extends State<PerfilWidget>
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
+                                    8.0, 0.0, 0.0, 0.0),
                                 child: Icon(
-                                  Icons.calendar_month_rounded,
+                                  Icons.abc,
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   size: 24.0,
@@ -503,7 +670,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '52kb67q1' /* Administrar reservas */,
+                                    '8zuhj9cn' /* Lenguaje */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -520,21 +687,32 @@ class _PerfilWidgetState extends State<PerfilWidget>
                         ),
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation1']!),
+                        animationsMap['containerOnPageLoadAnimation3']!),
                   ),
-                ),
-              if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                  child: AuthUserStreamWidget(
-                    builder: (context) => InkWell(
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('MisServicios');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const BsFuentesWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
                       },
                       child: Container(
                         width: double.infinity,
@@ -555,9 +733,9 @@ class _PerfilWidgetState extends State<PerfilWidget>
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Icon(
-                                  Icons.spa,
+                                    8.0, 0.0, 0.0, 0.0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.font,
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   size: 24.0,
@@ -568,7 +746,7 @@ class _PerfilWidgetState extends State<PerfilWidget>
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '725mhm2w' /* Administrar servicios */,
+                                    'gz8bvqaj' /* Tipo de fuente */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -585,234 +763,97 @@ class _PerfilWidgetState extends State<PerfilWidget>
                         ),
                       ),
                     ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation2']!),
+                        animationsMap['containerOnPageLoadAnimation4']!),
                   ),
-                ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      enableDrag: false,
-                      context: context,
-                      builder: (context) {
-                        return GestureDetector(
-                          onTap: () => FocusScope.of(context).unfocus(),
-                          child: Padding(
-                            padding: MediaQuery.viewInsetsOf(context),
-                            child: const BsIdiomaWidget(),
-                          ),
-                        );
-                      },
-                    ).then((value) => safeSetState(() {}));
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                    ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 12.0, 8.0, 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 0.0, 0.0),
-                            child: Icon(
-                              Icons.abc,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                '8zuhj9cn' /* Lenguaje */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: FFAppState().textosP.toDouble(),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation3']!),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      enableDrag: false,
-                      context: context,
-                      builder: (context) {
-                        return GestureDetector(
-                          onTap: () => FocusScope.of(context).unfocus(),
-                          child: Padding(
-                            padding: MediaQuery.viewInsetsOf(context),
-                            child: const BsFuentesWidget(),
-                          ),
-                        );
-                      },
-                    ).then((value) => safeSetState(() {}));
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                    ),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 12.0, 8.0, 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 0.0, 0.0),
-                            child: FaIcon(
-                              FontAwesomeIcons.font,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'gz8bvqaj' /* Tipo de fuente */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: FFAppState().textosP.toDouble(),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ).animateOnPageLoad(
-                    animationsMap['containerOnPageLoadAnimation4']!),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    GoRouter.of(context).prepareAuthEvent();
-                    await authManager.signOut();
-                    GoRouter.of(context).clearRedirectLocation();
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
 
-                    context.goNamedAuth('Login', context.mounted);
-                  },
-                  text: FFLocalizations.of(context).getText(
-                    'z2s8svr4' /* Cerrar sesión */,
-                  ),
-                  options: FFButtonOptions(
-                    width: 150.0,
-                    height: 44.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Readex Pro',
-                          fontSize: FFAppState().botones.toDouble(),
-                          letterSpacing: 0.0,
-                        ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(38.0),
-                  ),
-                ).animateOnPageLoad(
-                    animationsMap['buttonOnPageLoadAnimation1']!),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    await showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      enableDrag: false,
-                      context: context,
-                      builder: (context) {
-                        return GestureDetector(
-                          onTap: () => FocusScope.of(context).unfocus(),
-                          child: Padding(
-                            padding: MediaQuery.viewInsetsOf(context),
-                            child: const BsEliminarCuentaWidget(),
-                          ),
-                        );
+                        context.goNamedAuth('Login', context.mounted);
                       },
-                    ).then((value) => safeSetState(() {}));
-                  },
-                  text: FFLocalizations.of(context).getText(
-                    'kr3oqwem' /* Eliminar cuenta */,
-                  ),
-                  options: FFButtonOptions(
-                    width: 150.0,
-                    height: 44.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).error,
-                    textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Readex Pro',
-                          fontSize: FFAppState().botones.toDouble(),
-                          letterSpacing: 0.0,
+                      text: FFLocalizations.of(context).getText(
+                        'z2s8svr4' /* Cerrar sesión */,
+                      ),
+                      options: FFButtonOptions(
+                        width: 150.0,
+                        height: 44.0,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: FFAppState().botones.toDouble(),
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 1.0,
                         ),
-                    elevation: 0.0,
-                    borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(38.0),
+                        borderRadius: BorderRadius.circular(38.0),
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['buttonOnPageLoadAnimation1']!),
                   ),
-                ).animateOnPageLoad(
-                    animationsMap['buttonOnPageLoadAnimation2']!),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const BsEliminarCuentaWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                      text: FFLocalizations.of(context).getText(
+                        'kr3oqwem' /* Eliminar cuenta */,
+                      ),
+                      options: FFButtonOptions(
+                        width: 150.0,
+                        height: 44.0,
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).error,
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: FFAppState().botones.toDouble(),
+                                  letterSpacing: 0.0,
+                                ),
+                        elevation: 0.0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(38.0),
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['buttonOnPageLoadAnimation2']!),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

@@ -1,23 +1,30 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'bs_eliminar_cuenta_model.dart';
-export 'bs_eliminar_cuenta_model.dart';
+import 'package:provider/provider.dart';
+import 'bs_eliminar_reserva_model.dart';
+export 'bs_eliminar_reserva_model.dart';
 
-class BsEliminarCuentaWidget extends StatefulWidget {
-  const BsEliminarCuentaWidget({super.key});
+class BsEliminarReservaWidget extends StatefulWidget {
+  /// componente para eliminacion de una sola reserva
+  const BsEliminarReservaWidget({
+    super.key,
+    required this.eliminarReserva,
+  });
+
+  final DocumentReference? eliminarReserva;
 
   @override
-  State<BsEliminarCuentaWidget> createState() => _BsEliminarCuentaWidgetState();
+  State<BsEliminarReservaWidget> createState() =>
+      _BsEliminarReservaWidgetState();
 }
 
-class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
+class _BsEliminarReservaWidgetState extends State<BsEliminarReservaWidget>
     with TickerProviderStateMixin {
-  late BsEliminarCuentaModel _model;
+  late BsEliminarReservaModel _model;
 
   final animationsMap = <String, AnimationInfo>{};
 
@@ -30,28 +37,9 @@ class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BsEliminarCuentaModel());
+    _model = createModel(context, () => BsEliminarReservaModel());
 
     animationsMap.addAll({
-      'textOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: const Offset(0.0, 50.0),
-            end: const Offset(0.0, 0.0),
-          ),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 300.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-        ],
-      ),
       'buttonOnPageLoadAnimation1': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
@@ -102,57 +90,41 @@ class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 270.0,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 5.0,
-            color: Color(0x3B1D2429),
-            offset: Offset(
-              0.0,
-              -3.0,
-            ),
-          )
-        ],
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(0.0),
-          bottomRight: Radius.circular(0.0),
-          topLeft: Radius.circular(16.0),
-          topRight: Radius.circular(16.0),
+    context.watch<FFAppState>();
+
+    return Align(
+      alignment: const AlignmentDirectional(0.0, 1.0),
+      child: Container(
+        width: double.infinity,
+        height: 270.0,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(
-              FFLocalizations.of(context).getText(
-                'fbqvy91f' /* ¿Desea eliminar su cuenta de f... */,
-              ),
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).titleSmall.override(
-                    fontFamily: 'Readex Pro',
-                    color: const Color(0xFF3C7962),
-                    letterSpacing: 0.0,
-                  ),
-            ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 20.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  await authManager.deleteUser(context);
-                  GoRouter.of(context).prepareAuthEvent();
-                  await authManager.signOut();
-                  GoRouter.of(context).clearRedirectLocation();
-
-                  context.goNamedAuth('Login', context.mounted);
+                  await widget.eliminarReserva!.delete();
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Su reserva ha sido eliminada correctamente',
+                        style: TextStyle(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                      ),
+                      duration: const Duration(milliseconds: 4000),
+                      backgroundColor: FlutterFlowTheme.of(context).secondary,
+                    ),
+                  );
                 },
                 text: FFLocalizations.of(context).getText(
-                  'd81vac15' /* Si */,
+                  '3vn8acxu' /* Eliminar reserva */,
                 ),
                 options: FFButtonOptions(
                   width: double.infinity,
@@ -161,10 +133,10 @@ class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).error,
-                  textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily: 'Plus Jakarta Sans',
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Readex Pro',
                         color: Colors.white,
-                        fontSize: 16.0,
+                        fontSize: FFAppState().botones.toDouble(),
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.normal,
                       ),
@@ -173,17 +145,23 @@ class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
                     color: Colors.transparent,
                     width: 1.0,
                   ),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0.0),
+                    bottomRight: Radius.circular(0.0),
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
+                  ),
                 ),
               ).animateOnPageLoad(animationsMap['buttonOnPageLoadAnimation1']!),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 20.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   Navigator.pop(context);
                 },
                 text: FFLocalizations.of(context).getText(
-                  'hj1uwhhc' /* Cancelar */,
+                  'p2mrw7dc' /* Cancelar */,
                 ),
                 options: FFButtonOptions(
                   width: double.infinity,
@@ -191,18 +169,24 @@ class _BsEliminarCuentaWidgetState extends State<BsEliminarCuentaWidget>
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Colors.white,
+                  color: const Color(0xFFFFF6F6),
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Lexend Deca',
+                        fontFamily: 'Readex Pro',
                         color: const Color(0xFF57636C),
-                        fontSize: 16.0,
+                        fontSize: FFAppState().botones.toDouble(),
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.normal,
                       ),
-                  elevation: 0.0,
+                  elevation: 3.0,
                   borderSide: const BorderSide(
                     color: Colors.transparent,
-                    width: 0.0,
+                    width: 1.0,
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0.0),
+                    bottomRight: Radius.circular(0.0),
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
                   ),
                 ),
               ).animateOnPageLoad(animationsMap['buttonOnPageLoadAnimation2']!),

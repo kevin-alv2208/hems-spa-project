@@ -1,9 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'bs_agregar_reserva_model.dart';
 export 'bs_agregar_reserva_model.dart';
@@ -28,8 +30,11 @@ class BsAgregarReservaWidget extends StatefulWidget {
   State<BsAgregarReservaWidget> createState() => _BsAgregarReservaWidgetState();
 }
 
-class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
+class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget>
+    with TickerProviderStateMixin {
   late BsAgregarReservaModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -52,6 +57,47 @@ class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
     _model.textController3 ??=
         TextEditingController(text: widget.descripcionR);
     _model.textFieldFocusNode3 ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'buttonOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -141,7 +187,7 @@ class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
                                   widget.imageR!,
-                                  width: 150.0,
+                                  width: 142.0,
                                   height: 200.0,
                                   fit: BoxFit.contain,
                                 ),
@@ -621,6 +667,9 @@ class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
                                   cost:
                                       int.tryParse(_model.textController2.text),
                                   idUsuario: currentUserUid,
+                                  nameUser: currentUserDisplayName,
+                                  phoneUser: currentPhoneNumber,
+                                  correoUser: currentUserEmail,
                                 ));
                             setState(() {
                               _model.textController1?.clear();
@@ -674,10 +723,12 @@ class _BsAgregarReservaWidgetState extends State<BsAgregarReservaWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
-                        ),
+                        ).animateOnPageLoad(
+                            animationsMap['buttonOnPageLoadAnimation']!),
                       ),
                     ],
-                  ),
+                  ).animateOnPageLoad(
+                      animationsMap['columnOnPageLoadAnimation']!),
                 ),
               ),
             ),

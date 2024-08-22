@@ -135,8 +135,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'Servicios': const ServiciosWidget(),
       'Contactenos': const ContactenosWidget(),
-      'Perfil': const PerfilWidget(),
       'MisReservaciones': const MisReservacionesWidget(),
+      'Perfil': const PerfilWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -223,7 +223,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.account_circle_outlined,
+                  Icons.calendar_month_rounded,
                   color: currentIndex == 2
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -231,7 +231,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    'fbv268if' /* Perfil */,
+                    'ahfhxj3w' /* Reservas */,
                   ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -249,7 +249,7 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.calendar_month_rounded,
+                  Icons.account_circle_outlined,
                   color: currentIndex == 3
                       ? const Color(0xFF3C7962)
                       : FlutterFlowTheme.of(context).secondaryText,
@@ -257,7 +257,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 ),
                 Text(
                   FFLocalizations.of(context).getText(
-                    'ahfhxj3w' /* Reservas */,
+                    'fbv268if' /* Perfil */,
                   ),
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

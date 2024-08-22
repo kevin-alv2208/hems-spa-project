@@ -1,29 +1,28 @@
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'bs_editar_servicio_model.dart';
-export 'bs_editar_servicio_model.dart';
+import 'bs_editar_reserva_model.dart';
+export 'bs_editar_reserva_model.dart';
 
-class BsEditarServicioWidget extends StatefulWidget {
-  const BsEditarServicioWidget({
+class BsEditarReservaWidget extends StatefulWidget {
+  const BsEditarReservaWidget({
     super.key,
-    required this.editarDatosServicios,
+    required this.editarDatosReservas,
   });
 
-  final DocumentReference? editarDatosServicios;
+  final DocumentReference? editarDatosReservas;
 
   @override
-  State<BsEditarServicioWidget> createState() => _BsEditarServicioWidgetState();
+  State<BsEditarReservaWidget> createState() => _BsEditarReservaWidgetState();
 }
 
-class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
-  late BsEditarServicioModel _model;
+class _BsEditarReservaWidgetState extends State<BsEditarReservaWidget> {
+  late BsEditarReservaModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -34,7 +33,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BsEditarServicioModel());
+    _model = createModel(context, () => BsEditarReservaModel());
 
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -54,8 +53,8 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return StreamBuilder<ServicesRecord>(
-      stream: ServicesRecord.getDocument(widget.editarDatosServicios!),
+    return StreamBuilder<ReservaRecord>(
+      stream: ReservaRecord.getDocument(widget.editarDatosReservas!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -72,7 +71,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
           );
         }
 
-        final containerServicesRecord = snapshot.data!;
+        final containerReservaRecord = snapshot.data!;
 
         return Container(
           width: double.infinity,
@@ -104,7 +103,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                           children: [
                             Text(
                               FFLocalizations.of(context).getText(
-                                'pu9tzvup' /* Editar servicio */,
+                                '4ztruiwk' /* Editar reserva */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
@@ -211,11 +210,10 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                   }
 
                                   if (_model.uploadedFileUrl != '') {
-                                    await containerServicesRecord.reference
-                                        .update(createServicesRecordData(
+                                    await containerReservaRecord.reference
+                                        .update(createReservaRecordData(
                                       image: _model.uploadedFileUrl,
                                     ));
-                                    return;
                                   } else {
                                     return;
                                   }
@@ -224,7 +222,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
                                     valueOrDefault<String>(
-                                      containerServicesRecord.image,
+                                      containerReservaRecord.image,
                                       'https://cdn-icons-png.flaticon.com/512/1092/1092216.png',
                                     ),
                                     width: 143.0,
@@ -244,14 +242,14 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                       child: TextFormField(
                                         controller: _model.textController1 ??=
                                             TextEditingController(
-                                          text: containerServicesRecord
+                                          text: containerReservaRecord
                                               .serviceName,
                                         ),
                                         focusNode: _model.textFieldFocusNode1,
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: containerServicesRecord
+                                          labelText: containerReservaRecord
                                               .serviceName,
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
@@ -332,7 +330,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                         controller: _model.textController2 ??=
                                             TextEditingController(
                                           text: formatNumber(
-                                            containerServicesRecord.cost,
+                                            containerReservaRecord.cost,
                                             formatType: FormatType.decimal,
                                             decimalType:
                                                 DecimalType.periodDecimal,
@@ -344,7 +342,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: formatNumber(
-                                            containerServicesRecord.cost,
+                                            containerReservaRecord.cost,
                                             formatType: FormatType.decimal,
                                             decimalType:
                                                 DecimalType.periodDecimal,
@@ -427,14 +425,14 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                       child: TextFormField(
                                         controller: _model.textController3 ??=
                                             TextEditingController(
-                                          text: containerServicesRecord
+                                          text: containerReservaRecord
                                               .description,
                                         ),
                                         focusNode: _model.textFieldFocusNode3,
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: containerServicesRecord
+                                          labelText: containerReservaRecord
                                               .description,
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
@@ -513,115 +511,6 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 25.0, 0.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 10.0, 0.0),
-                                  child: Text(
-                                    containerServicesRecord.location,
-                                    maxLines: 2,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontSize:
-                                              FFAppState().textosP.toDouble(),
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              FlutterFlowPlacePicker(
-                                iOSGoogleMapsApiKey:
-                                    'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                                androidGoogleMapsApiKey:
-                                    'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                                webGoogleMapsApiKey:
-                                    'AIzaSyBxveoaBZjFCZkR5SwRY-I2oML3ic2A1v0',
-                                onSelect: (place) async {
-                                  setState(
-                                      () => _model.placePickerValue = place);
-                                },
-                                defaultText: '',
-                                icon: Icon(
-                                  Icons.place,
-                                  color: FlutterFlowTheme.of(context).info,
-                                  size: 16.0,
-                                ),
-                                buttonOptions: FFButtonOptions(
-                                  width: 120.0,
-                                  height: 40.0,
-                                  color: const Color(0xFF77BBA2),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color:
-                                            FlutterFlowTheme.of(context).info,
-                                        letterSpacing: 0.0,
-                                      ),
-                                  elevation: 2.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 0.0, 0.0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      await containerServicesRecord.reference
-                                          .update(createServicesRecordData(
-                                        location:
-                                            _model.placePickerValue.address,
-                                      ));
-                                    },
-                                    text: '',
-                                    icon: const Icon(
-                                      Icons.save_as_sharp,
-                                      size: 17.0,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: 60.0,
-                                      height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding: const EdgeInsets.all(0.0),
-                                      color: const Color(0xFF77BBA2),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: Colors.white,
-                                            fontSize:
-                                                FFAppState().botones.toDouble(),
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 3.0,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 15.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -630,7 +519,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                               Text(
                                 dateTimeFormat(
                                   "d/M/y",
-                                  containerServicesRecord.appointmentDate!,
+                                  containerReservaRecord.appointmentDate!,
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
@@ -698,8 +587,8 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                     });
                                   }
 
-                                  await containerServicesRecord.reference
-                                      .update(createServicesRecordData(
+                                  await containerReservaRecord.reference
+                                      .update(createReservaRecordData(
                                     appointmentDate: _model.datePicked1,
                                   ));
                                 },
@@ -722,7 +611,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                               Text(
                                 dateTimeFormat(
                                   "jm",
-                                  containerServicesRecord.appointmentTime!,
+                                  containerReservaRecord.appointmentTime!,
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
@@ -790,8 +679,8 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                                     });
                                   }
 
-                                  await containerServicesRecord.reference
-                                      .update(createServicesRecordData(
+                                  await containerReservaRecord.reference
+                                      .update(createReservaRecordData(
                                     appointmentTime: _model.datePicked2,
                                   ));
                                 },
@@ -809,10 +698,9 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                               0.0, 25.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              await containerServicesRecord.reference
-                                  .update(createServicesRecordData(
+                              await containerReservaRecord.reference
+                                  .update(createReservaRecordData(
                                 description: _model.textController3.text,
-                                location: _model.placePickerValue.address,
                                 cost: int.tryParse(_model.textController2.text),
                                 serviceName: _model.textController1.text,
                               ));
@@ -832,7 +720,7 @@ class _BsEditarServicioWidgetState extends State<BsEditarServicioWidget> {
                               );
                             },
                             text: FFLocalizations.of(context).getText(
-                              'fbfemibs' /* Editar servicios */,
+                              'xxgjybxk' /* Editar reserva */,
                             ),
                             icon: const Icon(
                               Icons.save_rounded,

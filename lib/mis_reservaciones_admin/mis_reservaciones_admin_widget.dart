@@ -1,11 +1,15 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/bs_editar_reserva_widget.dart';
+import '/components/bs_eliminar_reserva_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'mis_reservaciones_admin_model.dart';
 export 'mis_reservaciones_admin_model.dart';
@@ -19,10 +23,12 @@ class MisReservacionesAdminWidget extends StatefulWidget {
 }
 
 class _MisReservacionesAdminWidgetState
-    extends State<MisReservacionesAdminWidget> {
+    extends State<MisReservacionesAdminWidget> with TickerProviderStateMixin {
   late MisReservacionesAdminModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -41,6 +47,85 @@ class _MisReservacionesAdminWidgetState
           ),
         );
       }
+    });
+
+    animationsMap.addAll({
+      'textOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'rowOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
     });
   }
 
@@ -144,7 +229,8 @@ class _MisReservacionesAdminWidgetState
                                     fontSize: FFAppState().textosM.toDouble(),
                                     letterSpacing: 0.0,
                                   ),
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['textOnPageLoadAnimation1']!),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -179,7 +265,8 @@ class _MisReservacionesAdminWidgetState
                                             FFAppState().textosM.toDouble(),
                                         letterSpacing: 0.0,
                                       ),
-                                );
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation2']!);
                               },
                             ),
                           ),
@@ -233,17 +320,24 @@ class _MisReservacionesAdminWidgetState
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 1.0, 1.0, 1.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0),
-                                              child: Image.network(
-                                                valueOrDefault<String>(
-                                                  listaServiciosItem.image,
-                                                  'https://cdn-icons-png.flaticon.com/128/1057/1057315.png',
+                                            child: Hero(
+                                              tag: valueOrDefault<String>(
+                                                listaServiciosItem.image,
+                                                'https://cdn-icons-png.flaticon.com/128/1057/1057315.png' '$listaServiciosIndex',
+                                              ),
+                                              transitionOnUserGestures: true,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    listaServiciosItem.image,
+                                                    'https://cdn-icons-png.flaticon.com/128/1057/1057315.png',
+                                                  ),
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                width: 80.0,
-                                                height: 80.0,
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
@@ -354,6 +448,35 @@ class _MisReservacionesAdminWidgetState
                                                       ),
                                                     ],
                                                   ),
+                                                  Text(
+                                                    listaServiciosItem.nameUser,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: FFAppState()
+                                                              .textosP
+                                                              .toDouble(),
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    listaServiciosItem
+                                                        .phoneUser,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: FFAppState()
+                                                              .textosP
+                                                              .toDouble(),
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -368,42 +491,112 @@ class _MisReservacionesAdminWidgetState
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  if (valueOrDefault<bool>(
-                                                    valueOrDefault(
-                                                            currentUserDocument
-                                                                ?.rol,
-                                                            '') ==
-                                                        'user',
-                                                    false,
-                                                  ))
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  5.0,
-                                                                  0.0),
-                                                      child:
-                                                          AuthUserStreamWidget(
-                                                        builder: (context) =>
-                                                            const Icon(
-                                                          Icons.edit_square,
-                                                          color:
-                                                              Color(0xFF77BBA2),
-                                                          size: 24.0,
-                                                        ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                5.0, 0.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () =>
+                                                                  FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    BsEditarReservaWidget(
+                                                                  editarDatosReservas:
+                                                                      listaServiciosItem
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.edit_square,
+                                                        color:
+                                                            Color(0xFF77BBA2),
+                                                        size: 24.0,
                                                       ),
                                                     ),
-                                                  const Padding(
+                                                  ),
+                                                  Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 0.0, 0.0),
-                                                    child: Icon(
-                                                      Icons.delete_outline,
-                                                      color: Color(0xFFFF0000),
-                                                      size: 24.0,
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () =>
+                                                                  FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
+                                                                child:
+                                                                    BsEliminarReservaWidget(
+                                                                  eliminarReserva:
+                                                                      listaServiciosItem
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.delete_outline,
+                                                        color:
+                                                            Color(0xFFFF0000),
+                                                        size: 24.0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -438,9 +631,11 @@ class _MisReservacionesAdminWidgetState
                                             ],
                                           ),
                                         ],
-                                      ),
+                                      ).animateOnPageLoad(animationsMap[
+                                          'rowOnPageLoadAnimation']!),
                                     ),
-                                  ),
+                                  ).animateOnPageLoad(animationsMap[
+                                      'containerOnPageLoadAnimation']!),
                                 );
                               },
                             );

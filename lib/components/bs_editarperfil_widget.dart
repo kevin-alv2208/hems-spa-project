@@ -1,12 +1,14 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'bs_editarperfil_model.dart';
 export 'bs_editarperfil_model.dart';
@@ -18,8 +20,11 @@ class BsEditarperfilWidget extends StatefulWidget {
   State<BsEditarperfilWidget> createState() => _BsEditarperfilWidgetState();
 }
 
-class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
+class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget>
+    with TickerProviderStateMixin {
   late BsEditarperfilModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -52,6 +57,28 @@ class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
       'Telefono...',
     ));
     _model.txtTelefonoFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -217,9 +244,8 @@ class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: valueOrDefault<String>(
-                      currentUserDisplayName,
-                      'Nombre..',
+                    labelText: FFLocalizations.of(context).getText(
+                      'ah6ibjxe' /* Nombre... */,
                     ),
                     hintStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Readex Pro',
@@ -286,9 +312,8 @@ class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: valueOrDefault<String>(
-                      valueOrDefault(currentUserDocument?.lastName, ''),
-                      'Apellido..',
+                    labelText: FFLocalizations.of(context).getText(
+                      '916mhd1g' /* Apellido... */,
                     ),
                     hintStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Readex Pro',
@@ -354,9 +379,8 @@ class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
                   autofocus: false,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: valueOrDefault<String>(
-                      currentPhoneNumber,
-                      'Telefono...',
+                    labelText: FFLocalizations.of(context).getText(
+                      'nc3yymhm' /* Telefono... */,
                     ),
                     hintStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Readex Pro',
@@ -471,6 +495,6 @@ class _BsEditarperfilWidgetState extends State<BsEditarperfilWidget> {
           ],
         ),
       ),
-    );
+    ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation']!);
   }
 }

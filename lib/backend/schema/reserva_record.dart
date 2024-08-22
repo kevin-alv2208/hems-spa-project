@@ -65,6 +65,21 @@ class ReservaRecord extends FirestoreRecord {
   String get idUsuario => _idUsuario ?? '';
   bool hasIdUsuario() => _idUsuario != null;
 
+  // "nameUser" field.
+  String? _nameUser;
+  String get nameUser => _nameUser ?? '';
+  bool hasNameUser() => _nameUser != null;
+
+  // "phoneUser" field.
+  String? _phoneUser;
+  String get phoneUser => _phoneUser ?? '';
+  bool hasPhoneUser() => _phoneUser != null;
+
+  // "correoUser" field.
+  String? _correoUser;
+  String get correoUser => _correoUser ?? '';
+  bool hasCorreoUser() => _correoUser != null;
+
   void _initializeFields() {
     _serviceName = snapshotData['serviceName'] as String?;
     _description = snapshotData['description'] as String?;
@@ -76,6 +91,9 @@ class ReservaRecord extends FirestoreRecord {
     _cost = castToType<int>(snapshotData['cost']);
     _imageBlurHash = snapshotData['imageBlurHash'] as String?;
     _idUsuario = snapshotData['idUsuario'] as String?;
+    _nameUser = snapshotData['nameUser'] as String?;
+    _phoneUser = snapshotData['phoneUser'] as String?;
+    _correoUser = snapshotData['correoUser'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -123,6 +141,9 @@ Map<String, dynamic> createReservaRecordData({
   int? cost,
   String? imageBlurHash,
   String? idUsuario,
+  String? nameUser,
+  String? phoneUser,
+  String? correoUser,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -136,6 +157,9 @@ Map<String, dynamic> createReservaRecordData({
       'cost': cost,
       'imageBlurHash': imageBlurHash,
       'idUsuario': idUsuario,
+      'nameUser': nameUser,
+      'phoneUser': phoneUser,
+      'correoUser': correoUser,
     }.withoutNulls,
   );
 
@@ -156,7 +180,10 @@ class ReservaRecordDocumentEquality implements Equality<ReservaRecord> {
         e1?.appointmentTime == e2?.appointmentTime &&
         e1?.cost == e2?.cost &&
         e1?.imageBlurHash == e2?.imageBlurHash &&
-        e1?.idUsuario == e2?.idUsuario;
+        e1?.idUsuario == e2?.idUsuario &&
+        e1?.nameUser == e2?.nameUser &&
+        e1?.phoneUser == e2?.phoneUser &&
+        e1?.correoUser == e2?.correoUser;
   }
 
   @override
@@ -170,7 +197,10 @@ class ReservaRecordDocumentEquality implements Equality<ReservaRecord> {
         e?.appointmentTime,
         e?.cost,
         e?.imageBlurHash,
-        e?.idUsuario
+        e?.idUsuario,
+        e?.nameUser,
+        e?.phoneUser,
+        e?.correoUser
       ]);
 
   @override

@@ -1,11 +1,13 @@
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'bs_agregar_servicio_model.dart';
 export 'bs_agregar_servicio_model.dart';
@@ -18,8 +20,11 @@ class BsAgregarServicioWidget extends StatefulWidget {
       _BsAgregarServicioWidgetState();
 }
 
-class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
+class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget>
+    with TickerProviderStateMixin {
   late BsAgregarServicioModel _model;
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -40,6 +45,28 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
 
     _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 50.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -197,7 +224,7 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                                     _model.uploadedFileUrl,
                                     'https://cdn-icons-png.flaticon.com/512/1092/1092216.png',
                                   ),
-                                  width: 150.0,
+                                  width: 142.0,
                                   height: 200.0,
                                   fit: BoxFit.contain,
                                 ),
@@ -833,7 +860,8 @@ class _BsAgregarServicioWidgetState extends State<BsAgregarServicioWidget> {
                         ),
                       ),
                     ],
-                  ),
+                  ).animateOnPageLoad(
+                      animationsMap['columnOnPageLoadAnimation']!),
                 ),
               ),
             ),
